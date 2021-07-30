@@ -20,7 +20,7 @@
             class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}"
             alt="ocasionplus">
         <!-- Nav tabs -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top navBarOwn">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">jSS</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"

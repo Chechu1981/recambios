@@ -17,14 +17,20 @@ font-family: 'Josefin Sans', sans-serif;
     .tablaOwn tr{
         border-bottom: 2rem solid rgb(158, 158, 158);
     }
+
+    .tablaOwn td{
+        text-align:right;
+        padding-left: 50%;
+        position: relative;
+        margin-right: 10px;
+    }
     
     .tablaOwn td::before {
         content: attr(data-label);
         position: absolute;
-        left:0px;
-        width: 50%;
+        width: 10%;
         padding-left: 15px;
-        text-align:right;
+        left: 0;
     }
 }
 
@@ -135,11 +141,11 @@ span:hover .delete,span:hover .edit{
 }
 
 .tablaOwn td{
-    padding: 1rem 0rem 1rem 1rem;
+    padding: 1rem 2rem 1rem 1rem;
     border-bottom: 2px solid #989898;
 }
 
-.tablaOwn tr,.tablaOwn a{
+.tablaOwn td,.tablaOwn a{
     cursor: pointer;
     transition: 0.3s;
 }
@@ -149,7 +155,7 @@ span:hover .delete,span:hover .edit{
     border-radius: 50%;
 }
 
-.tablaOwn tr:hover a,.tablaOwn tr:hover{
+.tablaOwn tr:hover a,.tablaOwn tr:hover td{
     background-color: rgb(61, 61, 61);
     color: honeydew;
     font-size: medium;
@@ -157,4 +163,14 @@ span:hover .delete,span:hover .edit{
 
 .tablaOwn thead{
     border-bottom: 2px solid black;
+    position: sticky;
+    top: 86px;
+    z-index: 10;
+    height: 50px;
+    text-align: center;
+    background-color: #6c757d;
+}
+
+.navBarOwn{
+    width: 114%;
 }
