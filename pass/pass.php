@@ -6,7 +6,7 @@ $busqueda = new ConPass();
 if(!empty($fila)){
 ?>
 <h1>CONTRASEÑAS</h1>
-<table class="table table-align-middle table-hover ">
+<table class="tablaOwn">
     <thead>
         <tr>
             <th>N</th>

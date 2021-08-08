@@ -97,6 +97,10 @@ span:hover .delete,span:hover .edit{
     opacity: 1;
 }
 
+.foot{
+    margin-top: 10px;
+}
+
 .footText{
     margin-left: 15%;
 }
@@ -127,6 +131,11 @@ span:hover .delete,span:hover .edit{
     }
 }
 
+#table{
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .hidden{
     display: none;
 }
@@ -150,9 +159,19 @@ span:hover .delete,span:hover .edit{
     transition: 0.3s;
 }
 
-.tablaOwn tr:hover img{
+.tablaOwn tr:hover span img{
     background-color: white;
     border-radius: 50%;
+}
+
+.tablaOwn tr:hover img{
+    background-color: white;
+    border-radius: 5%;
+}
+
+.tablaOwn a:hover svg{
+    background-color: rgb(47, 231, 255);
+    border-radius: 5%;
 }
 
 .tablaOwn tr:hover a,.tablaOwn tr:hover td{
@@ -173,4 +192,39 @@ span:hover .delete,span:hover .edit{
 
 .navBarOwn{
     width: 114%;
+}
+
+
+/* TARJETAS DE LA PGINA INICIAL */
+
+.card{
+    display: inline-block;
+    padding: 10px;
+    margin:2rem;
+    cursor: pointer;
+    transition: 0.3s;
+    background-color:#f5f5f5;
+}
+
+.card:hover{
+    box-shadow: 5px 5px 5px black;
+    animation: bgCard 30s ease forwards;
+    background: linear-gradient(90deg, rgb(0, 105, 175) 0%, rgb(69, 121, 9) 35%, rgba(0,212,255,1) 100%);
+    background-size: 600% 600%;
+}
+
+.card h1{
+    margin:auto;
+}
+
+@keyframes bgCard {
+    0%{
+        background-position: 0% 50%;
+    }
+    50%{
+        background-position: 100% 50%;
+    }
+    100%{
+        background-position: 0% 50%;
+    }
 }

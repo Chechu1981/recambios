@@ -126,16 +126,16 @@ class ConPass{
       $i = 1;
       while($fila = $select->fetch()){
           $datos = $datos .'<tr>
-              <td scope="row">'.$i++.'</td>
-              <td>'.$fila[1].'</td>
-              <td>'.$fila[2].'</td>
-              <td>'.$fila[3].'<input type="text" id="1'.$fila[0].'" value="'.$fila[3].'" class="hidden"><img src="./img/content_copy_black_24dp.svg" class="finger" onclick="copiar(1'.$fila[0].')" ></td>
-              <td>'.$fila[4].'<input type="text" id="2'.$fila[0].'" value="'.$fila[4].'" class="hidden"><img src="./img/content_copy_black_24dp.svg" class="finger" onclick="copiar(2'.$fila[0].')" ></td>
-              <td><a href="javascript:openWindow(\'./pass/modificar.php?id='.$fila[0].'\')" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+              <td scope="row" data-label="N">'.$i++.'</td>
+              <td data-label="PAGINA" >'.$fila[1].'</td>
+              <td data-label="CENTRO" >'.$fila[2].'</td>
+              <td data-label="USUARIO" >'.$fila[3].'<input type="text" id="1'.$fila[0].'" value="'.$fila[3].'" class="hidden"><img src="./img/content_copy_black_24dp.svg" class="finger" onclick="copiar(1'.$fila[0].')" ></td>
+              <td data-label="CONTRASEÑA" >'.$fila[4].'<input type="text" id="2'.$fila[0].'" value="'.$fila[4].'" class="hidden"><img src="./img/content_copy_black_24dp.svg" class="finger" onclick="copiar(2'.$fila[0].')" ></td>
+              <td data-label="EDIT" ><a href="javascript:openWindow(\'./pass/modificar.php?id='.$fila[0].'\')" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
               <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
               <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
             </svg></a></td>
-<td><span data-bs-toggle="modal" data-bs-target="#sel'.str_replace(' ','',$fila[0]).'"><img class="finger" src="./img/info_black_24dp.svg">
+<td data-label="INFO" ><span data-bs-toggle="modal" data-bs-target="#sel'.str_replace(' ','',$fila[0]).'"><img class="finger" src="./img/info_black_24dp.svg">
 </span></td>
           </tr>
           <!-- Modal -->

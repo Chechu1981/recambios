@@ -1,6 +1,7 @@
 let table = document.getElementById('table');
 let tabPass = document.getElementById('tabPass');
 let buscar = document.getElementById('search');
+ 
 buscar.focus()
 let findCust = () => {
     cadena = buscar.value;
@@ -28,8 +29,7 @@ let openWindow = (target) => {
     window.open(target,'Editar',options);
 }
 
-let internas = document.getElementById('internas');
-internas.addEventListener('click',()=>{
+let openInternas = () => {
     let xhr;
     if(window.XMLHttpRequest) xhr = new XMLHttpRequest();
     else xhr = new ActiveXObject("Microsoft.XMLHTTP");
@@ -39,7 +39,10 @@ internas.addEventListener('click',()=>{
         table.innerHTML = data.target.response;
     });
     xhr.send(); 
-});
+}
+
+let internas = document.getElementById('internas');
+internas.addEventListener('click',openInternas);
 
 let intNew = document.getElementById('intNew');
 intNew.addEventListener('click',()=>{
@@ -55,10 +58,9 @@ intNew.addEventListener('click',()=>{
     xhr.send();
 });
 
-let inicio = document.getElementById('inicio');
-inicio.addEventListener('click',()=>{
-let xhr;
-if(window.XMLHttpRequest) xhr = new XMLHttpRequest();
+let openAgenda = () => {
+    let xhr;
+    if(window.XMLHttpRequest) xhr = new XMLHttpRequest();
     else xhr = new ActiveXObject("Microsoft.XMLHTTP");
     xhr.open('GET','./tables/proveedores.php');
     xhr.addEventListener('load',(data) =>{
@@ -67,7 +69,10 @@ if(window.XMLHttpRequest) xhr = new XMLHttpRequest();
     });
     xhr.send();
     buscar.focus()
-});
+};
+
+let inicio = document.getElementById('inicio');
+inicio.addEventListener('click',openAgenda);
 
 let nuevo = document.getElementById('new');
 nuevo.addEventListener('click',()=>{
@@ -83,10 +88,9 @@ nuevo.addEventListener('click',()=>{
     xhr.send();
 });
 
-let pass = document.getElementById('pass');
-pass.addEventListener('click',()=>{
-let xhr;
-if(window.XMLHttpRequest) xhr = new XMLHttpRequest();
+let openPass = () => {
+    let xhr;
+    if(window.XMLHttpRequest) xhr = new XMLHttpRequest();
     else xhr = new ActiveXObject("Microsoft.XMLHTTP");
     xhr.open('GET','./pass/pass.php');
     xhr.addEventListener('load',(data) =>{
@@ -95,7 +99,10 @@ if(window.XMLHttpRequest) xhr = new XMLHttpRequest();
     });
     xhr.send();
     buscar.focus()
-});
+}
+
+let pass = document.getElementById('pass');
+pass.addEventListener('click',openPass);
 
 let pssNuevo = document.getElementById('passNew');
 pssNuevo.addEventListener('click',()=>{
@@ -111,10 +118,9 @@ pssNuevo.addEventListener('click',()=>{
     xhr.send();
 });
 
-let links = document.getElementById('links');
-links.addEventListener('click',()=>{
-let xhr;
-if(window.XMLHttpRequest) xhr = new XMLHttpRequest();
+let openEnlaces = () => {
+    let xhr;
+    if(window.XMLHttpRequest) xhr = new XMLHttpRequest();
     else xhr = new ActiveXObject("Microsoft.XMLHTTP");
     xhr.open('GET','./links/links.php');
     xhr.addEventListener('load',(data) =>{
@@ -123,7 +129,10 @@ if(window.XMLHttpRequest) xhr = new XMLHttpRequest();
     });
     xhr.send();
     buscar.focus()
-});
+}
+
+let links = document.getElementById('links');
+links.addEventListener('click',openEnlaces);
 
 let linksNuevo = document.getElementById('linkNew');
 linksNuevo.addEventListener('click',()=>{
@@ -147,3 +156,21 @@ let copiar = (id) =>{
     document.execCommand("copy");
     texto.style = "display:none";
 }
+
+//CARGA DEL INICIO
+
+let firstPage = () => {
+    if(window.XMLHttpRequest) xhr = new XMLHttpRequest();
+    else xhr = new ActiveXObject("Microsoft.XMLHTTP");
+    xhr.open('GET','./main/cards.php');
+    xhr.addEventListener('load',(data)=>{
+            table.innerHTML = data.target.response;
+    });
+    xhr.send();
+    tabPass.innerHTML = "";
+}
+
+window.onload = firstPage();
+
+let btnIni = document.getElementById('first');
+btnIni.addEventListener('click',firstPage);
