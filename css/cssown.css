@@ -134,6 +134,7 @@ span:hover .delete,span:hover .edit{
 #table{
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .hidden{
@@ -213,8 +214,12 @@ span:hover .delete,span:hover .edit{
     background-size: 600% 600%;
 }
 
-.card h1{
-    margin:auto;
+.card h3{
+    text-align:center;
+}
+
+.img{
+    text-align:center;
 }
 
 @keyframes bgCard {

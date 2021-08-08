@@ -30,6 +30,7 @@ let openWindow = (target) => {
 }
 
 let openInternas = () => {
+    table.style = 'display:block';
     let xhr;
     if(window.XMLHttpRequest) xhr = new XMLHttpRequest();
     else xhr = new ActiveXObject("Microsoft.XMLHTTP");
@@ -59,6 +60,7 @@ intNew.addEventListener('click',()=>{
 });
 
 let openAgenda = () => {
+    table.style = 'display:block';
     let xhr;
     if(window.XMLHttpRequest) xhr = new XMLHttpRequest();
     else xhr = new ActiveXObject("Microsoft.XMLHTTP");
@@ -89,6 +91,7 @@ nuevo.addEventListener('click',()=>{
 });
 
 let openPass = () => {
+    table.style = 'display:block';
     let xhr;
     if(window.XMLHttpRequest) xhr = new XMLHttpRequest();
     else xhr = new ActiveXObject("Microsoft.XMLHTTP");
@@ -119,6 +122,7 @@ pssNuevo.addEventListener('click',()=>{
 });
 
 let openEnlaces = () => {
+    table.style = 'display:block';
     let xhr;
     if(window.XMLHttpRequest) xhr = new XMLHttpRequest();
     else xhr = new ActiveXObject("Microsoft.XMLHTTP");
@@ -160,6 +164,7 @@ let copiar = (id) =>{
 //CARGA DEL INICIO
 
 let firstPage = () => {
+    table.style = 'display:flex';
     if(window.XMLHttpRequest) xhr = new XMLHttpRequest();
     else xhr = new ActiveXObject("Microsoft.XMLHTTP");
     xhr.open('GET','./main/cards.php');

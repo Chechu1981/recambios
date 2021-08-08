@@ -5,7 +5,7 @@ $datos = new ConInt();
 $registros = $datos->search();
 ?>
 <h1>INTERNAS</h1>
-<table class="table table-align-middle table-hover">
+<table class="tablaOwn">
     <thead class="thead-inverse">
         <tr>
             <th>CENTRO</th>
@@ -13,6 +13,7 @@ $registros = $datos->search();
             <th>CARROCERIA</th>
             <th>LIMPIEZA</th>
             <th>VENTAS</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>

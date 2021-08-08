@@ -2,7 +2,7 @@
     <div>
         <h3>AGENDA</h3>
     </div>
-    <div>
+    <div class="img">
         <img src="./img/contact_phone_black_48dp.svg">
 </div>
     <div>
@@ -13,7 +13,7 @@
     <div>
         <h3>CONTRASEÑAS</h3>
     </div>
-    <div>
+    <div class="img">
         <img src="./img/password_black_48dp.svg">
 </div>
     <div>
@@ -24,7 +24,7 @@
     <div>
         <h3>INTERNAS</h3>
     </div>
-    <div>
+    <div class="img">
         <img src="./img/my_location_black_48dp.svg">
 </div>
     <div>
@@ -35,7 +35,7 @@
     <div>
         <h3>ENLACES</h3>
     </div>
-    <div>
+    <div class="img">
         <img src="./img/my_location_black_48dp.svg">
 </div>
     <div>
