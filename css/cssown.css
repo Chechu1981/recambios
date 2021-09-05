@@ -4,6 +4,47 @@
 font-family: 'Josefin Sans', sans-serif;
 }
 
+.contenedor{
+    margin: 1% 10%;
+}
+
+.google{
+    background-color: white;
+    display: inline-flex;
+    padding: 8px;
+    width: 100%;
+    max-width: 584px;
+    border-radius: 50px;
+    border: 1px solid #dfe1e5;
+}
+
+.google:hover{
+    box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
+    border-color: rgba(223,225,229,0);
+}
+
+.google span{
+    display: inline-flex;
+    fill:currentColor;
+    margin: 3px 3px 0 0;
+    color: #9aa0a6;
+    height: 20px;
+    width: 20px;
+}
+
+.google input{
+    border:none;
+    height: 24px;
+    width: 90%;
+    display: inline-flex;
+    justify-content: center;
+    
+}
+
+.google input:focus-visible{
+    outline: transparent;
+}
+
 @media(max-width: 992px){
     .tablaOwn thead{
         display:none;
@@ -182,6 +223,7 @@ span:hover .delete,span:hover .edit{
 }
 
 .tablaOwn thead{
+    width:max-content;
     border-bottom: 2px solid black;
     position: sticky;
     top: 86px;
@@ -192,13 +234,20 @@ span:hover .delete,span:hover .edit{
 }
 
 .navBarOwn{
-    width: 114%;
+    width: 100%;
 }
 
 
 /* TARJETAS DE LA PGINA INICIAL */
 
 .card{
+    border-radius: 57% 43% 37% 63% / 45% 52% 48% 55%;
+    box-shadow: inset 10px 10px 10px rgba(0,0,0,0.05),
+                15px 25px 10px rgba(0, 0, 0, 0.1),
+                15px 20px 20px rgba(0, 0, 0, 0.05),
+                inset -10px -15px 10px rgba(255, 255, 255, 0.9);
+
+    width: 300px;
     display: inline-block;
     padding: 10px;
     margin:2rem;
@@ -208,7 +257,10 @@ span:hover .delete,span:hover .edit{
 }
 
 .card:hover{
-    box-shadow: 5px 5px 5px black;
+    box-shadow: inset -10px -10px 10px rgba(0,0,0,0.1),
+                15px 25px 10px rgba(0, 0, 0, 0.8),
+                15px 20px 20px rgba(0, 0, 0, 0.1),
+                inset 10px 15px 10px rgba(255, 255, 255, 0.9);
     animation: bgCard 30s ease forwards;
     background: linear-gradient(90deg, rgb(0, 105, 175) 0%, rgb(69, 121, 9) 35%, rgba(0,212,255,1) 100%);
     background-size: 600% 600%;
@@ -224,12 +276,67 @@ span:hover .delete,span:hover .edit{
 
 @keyframes bgCard {
     0%{
-        background-position: 0% 50%;
-    }
-    50%{
         background-position: 100% 50%;
     }
-    100%{
-        background-position: 0% 50%;
+    50%{
+        background-position: 50% 50%;
     }
+    100%{
+        background-position: 100% 50%;
+    }
+}
+
+/* CALCULADORA */
+
+.calculadora{
+    text-align:center;
+}
+
+.calculadora .cabecera{
+    margin-top: 10px;
+}
+
+.calculadora .cabecera .input{
+    display:inline;
+}
+
+.calculadora .cabecera button{
+    background-color: rgb(155,155,155,0.7);
+    transition: 0.3;
+}
+
+.calculadora .cabecera button:hover{
+    background-color: rgba(180, 246, 255, 0.7);
+    box-shadow: 2px 2px rgb(200,200,200,0.60) ;
+}
+
+.form-cantidad, .form-pvp, .form-dto{
+    width: 100px;
+    text-align: center;
+}
+
+.form-pvp,  .form-subtotal{
+    text-align:right;
+}
+
+
+/* TABLA CON CSS */
+
+.tabla{
+    display: grid;
+    grid-gap: 3px;
+    grid-auto-rows: minmax(100px, auto);
+    justify-content: space-around;
+}
+
+.tabla-encabezado{
+    display: grid;
+    grid-gap: 1.5rem;
+    grid-template-columns: auto auto auto auto auto auto;
+    font-size: larger;
+}
+
+.tabla-filas{
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
 }

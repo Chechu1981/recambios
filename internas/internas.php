@@ -5,18 +5,12 @@ $datos = new ConInt();
 $registros = $datos->search();
 ?>
 <h1>INTERNAS</h1>
-<table class="tablaOwn">
-    <thead class="thead-inverse">
-        <tr>
-            <th>CENTRO</th>
-            <th>MECÁNICA</th>
-            <th>CARROCERIA</th>
-            <th>LIMPIEZA</th>
-            <th>VENTAS</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-            <?php echo $registros; ?>
-        </tbody>
-</table>
+    <div class="tabla-encabezado">
+            <div>CENTRO</div>
+            <div>MECÁNICA</div>
+            <div>CARROCERIA</div>
+            <div>LIMPIEZA</div>
+            <div>VENTAS</div>
+            <div></div>
+    </div>
+        <?php echo $registros; ?>

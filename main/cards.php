@@ -6,7 +6,7 @@
         <img src="./img/contact_phone_black_48dp.svg">
 </div>
     <div>
-        lorem ipsum dolor sit am.lorem ipsum
+        Teléfonos, contactos, correos electrónicos, whatsapp, ...
     </div>
 </div>
 <div class="card" id="openPass" onclick="openPass()" >
@@ -17,7 +17,7 @@
         <img src="./img/password_black_48dp.svg">
 </div>
     <div>
-        lorem ipsum dolor sit am.lorem ipsum
+        Contraseñas de páginas, correos, centros, proveedores, ...
     </div>
 </div>
 <div class="card" id="internasCard" onclick="openInternas()">
@@ -28,7 +28,7 @@
         <img src="./img/my_location_black_48dp.svg">
 </div>
     <div>
-        lorem ipsum dolor sit am.lorem ipsum
+        Órdenes internas del mes acutal.
     </div>
 </div>
 <div class="card" id="openEnlaces" onclick="openEnlaces()">
@@ -36,9 +36,20 @@
         <h3>ENLACES</h3>
     </div>
     <div class="img">
-        <img src="./img/my_location_black_48dp.svg">
+        <img src="./img/insert_link_black_48dp.svg">
 </div>
     <div>
-        lorem ipsum dolor sit am.lorem ipsum
+        Enlaces más frecuentes agrupados por usos.
+    </div>
+</div>
+<div class="card" id="openCalc" onclick="openCalc()">
+    <div>
+        <h3>CALCULADORA</h3>
+    </div>
+    <div class="img">
+        <img src="./img/calculate_black_48dp.svg">
+</div>
+    <div>
+        Calcula descuentos, portes, IVA, unidades, .....
     </div>
 </div>

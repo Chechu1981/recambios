@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Lato&family=Open+Sans&family=Qahiri&family=Roboto&display=swap');
+
+*{
+font-family: 'Josefin Sans', sans-serif;
+}
+
+body{
+    background-size: 3800px;
+    background-image: linear-gradient(140deg, #EADEDB 0%, #BC70A4 50%, #BFD641 75%);
+    animation-name: fondo;
+    animation-timing-function: erase-out;
+    animation-direction: alternate-reverse;
+    animation-iteration-count: infinite;
+    animation-duration: 13s;
+}
+
+@keyframes fondo{
+    0%{
+        background-position: 0% 0%;
+    }
+    100%{
+        background-position: 100% 100%;
+    }
+}
+
+@media (max-width:900px) {
+    .background{
+        padding: 50px 10px 50px 10px;
+        background-color: rgb(255, 236, 236);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: -3px -2px 10px black;
+        border-radius: 11px;
+        border: 3px #0000004a solid;
+    }
+
+    .name, .pass, .validate{
+        margin: 1rem;
+    }
+}
+
+
+
+@media (min-width:900px) {
+    .background{
+    width:25%;
+    padding: 50px 10px 50px 10px;
+    background-color: rgb(255, 236, 236);
+    /* centrar vertical y horizontalmente */  
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: -3px -2px 10px black;
+    border-radius: 11px;
+    border: 3px #0000004a solid;
+    }
+    
+    .name, .pass, .validate{
+        margin: 2rem;
+    }
+}
+
+.form{
+    font-size: 1.2rem;
+}
+
+.head{
+    font-size: 2rem;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 10%;
+}
+
+.name input, .pass input{
+    border: transparent;
+    background-color: transparent;
+    border-bottom: 1px solid grey;
+    display: block;
+    margin: 10px;
+    transition: 0.5s;
+}
+
+.name input:focus-visible, .name input:focus, .pass input:focus, .pass input:focus-visible{
+    border-bottom:2px black solid;
+    background-color:transparent;
+    outline: none;
+}
+
+.name input:focus-visible .name label, .name input:focus .name label, .pass input:focus > label, .pass input:focus-visible > label{
+    animation-name: labelani;
+    animation-duration: 0.5s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+}
+
+.validate{
+    text-align: center;
+}
+
+.validate button{
+    color: #d9eef7;
+    border: solid 1px #0076a3;
+    background: #0095cd;
+    background: -webkit-gradient(linear, left top, left bottom, from(#00adee), to(#0078a5));
+    display: inline-block;
+    zoom: 1;
+    display: inline;
+    vertical-align: baseline;
+    margin: 0 2px;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font: 14px/100% Arial, Helvetica, sans-serif;
+    padding: .5em 2em .55em;
+    text-shadow: 0 1px 1px rgb(0 0 0 / 30%);
+    -webkit-border-radius: .5em;
+    -moz-border-radius: .5em;
+    border-radius: .5em;
+    -webkit-box-shadow: 0 1px 2px rgb(0 0 0 / 20%);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    box-shadow: 0 1px 2px rgb(0 0 0 / 20%);
+}
+
+@keyframes labelani {
+    0%{
+        margin-bottom: 0px;
+        font-size:inherit;
+    }
+    100%{
+        margin-bottom: 150px;
+        font-size:0.5rem;
+    }
+    
+}

@@ -1,6 +1,8 @@
 let table = document.getElementById('table');
 let tabPass = document.getElementById('tabPass');
 let buscar = document.getElementById('search');
+let oHead = document.getElementsByTagName('HEAD').item(0); 
+let oScript= document.createElement("script");
  
 buscar.focus()
 let findCust = () => {
@@ -31,6 +33,7 @@ let openWindow = (target) => {
 
 let openInternas = () => {
     table.style = 'display:block';
+    buscar.disabled = false;
     let xhr;
     if(window.XMLHttpRequest) xhr = new XMLHttpRequest();
     else xhr = new ActiveXObject("Microsoft.XMLHTTP");
@@ -61,6 +64,7 @@ intNew.addEventListener('click',()=>{
 
 let openAgenda = () => {
     table.style = 'display:block';
+    buscar.disabled = false;
     let xhr;
     if(window.XMLHttpRequest) xhr = new XMLHttpRequest();
     else xhr = new ActiveXObject("Microsoft.XMLHTTP");
@@ -92,6 +96,7 @@ nuevo.addEventListener('click',()=>{
 
 let openPass = () => {
     table.style = 'display:block';
+    buscar.disabled = false;
     let xhr;
     if(window.XMLHttpRequest) xhr = new XMLHttpRequest();
     else xhr = new ActiveXObject("Microsoft.XMLHTTP");
@@ -123,6 +128,7 @@ pssNuevo.addEventListener('click',()=>{
 
 let openEnlaces = () => {
     table.style = 'display:block';
+    buscar.disabled = false;
     let xhr;
     if(window.XMLHttpRequest) xhr = new XMLHttpRequest();
     else xhr = new ActiveXObject("Microsoft.XMLHTTP");
@@ -132,7 +138,7 @@ let openEnlaces = () => {
         table.innerHTML = data.target.response;
     });
     xhr.send();
-    buscar.focus()
+    buscar.focus();
 }
 
 let links = document.getElementById('links');
@@ -164,6 +170,7 @@ let copiar = (id) =>{
 //CARGA DEL INICIO
 
 let firstPage = () => {
+    buscar.disabled = false;
     table.style = 'display:flex';
     if(window.XMLHttpRequest) xhr = new XMLHttpRequest();
     else xhr = new ActiveXObject("Microsoft.XMLHTTP");
@@ -179,3 +186,30 @@ window.onload = firstPage();
 
 let btnIni = document.getElementById('first');
 btnIni.addEventListener('click',firstPage);
+
+// CALCULADORA
+
+let openCalc = () => {
+    table.style = 'display:block';
+    buscar.disabled = true;
+    let xhr;
+    if(window.XMLHttpRequest) xhr = new XMLHttpRequest();
+    else xhr = new ActiveXObject("Microsoft.XMLHTTP");
+    xhr.open('GET','./calc/calc.php');
+    xhr.addEventListener('load',(data) =>{
+        tabPass.innerHTML = "";
+        table.innerHTML = data.target.response;
+    });
+    xhr.send();
+    buscar.focus();
+    setTimeout(() => {
+        oScript.type = "text/javascript"; 
+        oScript.src="./js/calc.js"; 
+        oHead.appendChild( oScript);
+    }, 200);
+    
+}
+
+let calc = document.getElementById('calc');
+calc.addEventListener('click',openCalc);
+
