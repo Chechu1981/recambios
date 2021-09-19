@@ -7,10 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="./img/chechu.ico" sizes="32x32">
-    <!-- <link href="./css/bootstrap.min.css" rel="stylesheet"> -->
     <link href="./css/cssown.css" rel="stylesheet" >
-    <script src="./js/jquery-3.6.0.min.js"></script>
-    <!-- <script src="./js/bootstrap.min.js"></script> -->
 </head>
 
 <body>

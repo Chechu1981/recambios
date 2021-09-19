@@ -36,8 +36,8 @@ let openWindow = (target) => {
     window.open(target,'Editar',options);
 }
 
-let openInternas = () => {
-    menuOcultar();
+let openInternas = (e) => {
+    (e == true) ? menuOcultar() : '';
     table.style.display ='block';
     buscar.disabled = false;
     xhr.open('GET','./internas/internas.php');
@@ -55,8 +55,8 @@ let intNew = document.getElementById('intNew');
     xhr.send();
 });
 
-let openAgenda = () => {
-    menuOcultar();
+let openAgenda = (e) => {
+    (e == true) ? menuOcultar() : '';
     table.style = 'display:block';
     document.getElementById('search').disabled = false;
     xhr.open('GET','./tables/proveedores.php');
@@ -75,8 +75,8 @@ let nuevo = document.getElementById('new');
     xhr.send();
 });
 
-let openPass = () => {
-    menuOcultar();
+let openPass = (e) => {
+    (e == true) ? menuOcultar() : '';
     table.style.display = 'block';
     document.getElementById('search').disabled = false;
     xhr.open('GET','./pass/pass.php');
@@ -95,8 +95,8 @@ let pssNuevo = document.getElementById('passNew');
     xhr.send();
 });
 
-let openEnlaces = () => {
-    menuOcultar();
+let openEnlaces = (e) => {
+    (e == true) ? menuOcultar() : '';
     table.style = 'display:block';
     document.getElementById('search').disabled = false;
     xhr.open('GET','./links/links.php');
@@ -125,21 +125,23 @@ let copiar = (id) =>{
 
 //CARGA DEL INICIO
 
-let firstPage = () => {
+let firstPage = (ini) => {
+    if(ini == true){
+        respuesta2 = '';
+    }
     buscar.disabled = false;
-    table.style.display = 'flex';
-    xhr.open('GET','./main/cards.php');
+    xhr.open('POST','./main/cards.php');
     xhr.addEventListener('load',(data)=>{
         table.innerHTML = data.target.response + respuesta2;
     });
     xhr.send();
 }
-document.body.onload = firstPage();
+document.body.onload = firstPage(true);
 window.onload = document.getElementById('search').focus();
 // CALCULADORA
 
-let openCalc = () => {
-    menuOcultar();
+let openCalc = (e) => {
+    (e == true) ? menuOcultar() : '';
     table.style = 'display:block';
     document.getElementById('search').disabled = true;
     xhr.open('GET','./calc/calc.php');
@@ -168,12 +170,12 @@ let abrirmodal = (id,tb) => {
 }
 
 document.body.addEventListener('click',(e)=>{
-    (e.target.id == "calc") ? openCalc() : "";
-    (e.target.alt == "ocasionplus") ? firstPage() : "";
-    (e.target.id == "links") ? openEnlaces() : "";
-    (e.target.id == "pass") ? openPass() : "";
-    (e.target.id == "inicio") ? openAgenda() : "";
-    (e.target.id == "internas") ? openInternas() : "";
+    (e.target.id == "calc") ? openCalc(true) : "";
+    (e.target.alt == "ocasionplus") ? firstPage(true) : "";
+    (e.target.id == "links") ? openEnlaces(true) : "";
+    (e.target.id == "pass") ? openPass(true) : "";
+    (e.target.id == "inicio") ? openAgenda(true) : "";
+    (e.target.id == "internas") ? openInternas(true) : "";
     (e.target.id == "info") ? abrirmodal(e.target.alt,1) : "";
     (e.target.id == "Pinfo") ? abrirmodal(e.target.alt,2) : "";
     (e.target.id == "closeModal") ? document.getElementById("myModal").style.display = "none" : "";
