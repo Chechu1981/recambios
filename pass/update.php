@@ -1,7 +1,7 @@
 <?php 
 include_once('../connection/controller_pass.php');
 
-$datos = array($_GET['id'],$_GET['web'],$_GET['centro'],$_GET['usuario'],$_GET['pass']);
+$datos = array($_POST['id'],$_POST['web'],$_POST['centro'],$_POST['usuario'],$_POST['pass']);
 
 $busqueda = new ConPass();
 

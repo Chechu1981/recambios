@@ -22,7 +22,7 @@ let guardar = () =>{
     let rute = "./docs/"+rnd;
     let modo = document.getElementById('modo').value;
 
-    var formData = new FormData();
+    const formData = new FormData();
     formData.append("nombre", nombre);
     formData.append("marca", marca);
     formData.append("mail", mail);
@@ -45,9 +45,9 @@ let guardar = () =>{
     
     let id = getParameterByName('id');
     formData.append("id", id);
-    let datos = {id,nombre,marca,mail,tlfn,contacto,ciudad,tipo,fichero,nameFile,typeFile,rute,modo};
+    //let datos = {id,nombre,marca,mail,tlfn,contacto,ciudad,tipo,fichero,nameFile,typeFile,rute,modo};
     
-    var xhr = new XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
     xhr.addEventListener('progress',function(e){
         let percent = (e.loaded / e.total)*100;
         let i=0;
@@ -80,7 +80,7 @@ let eliminar = () =>{
     let id = getParameterByName('id');
     //let datos = {id,nombre,marca,mail,tlfn,contacto,ciudad,tipo};
     
-    var xhr = new XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
     
     xhr.open('GET','../tables/eliminar.php?id='+id);
     xhr.addEventListener('load',(id)=>{
@@ -91,7 +91,7 @@ let eliminar = () =>{
     setInterval(function(){window.close()},600);
 }
 
-let guardarPass = () =>{
+let guardarPass = () =>{    
     let web = document.getElementById('web').value;
     let centro = document.getElementById('centro').value;
     let usuario = document.getElementById('usuario').value;
@@ -107,14 +107,20 @@ let guardarPass = () =>{
     
     let id = getParameterByName('id');
     let datos = {id,web,centro,usuario,pass};
+    const frmData = new FormData();
+    frmData.append("id",id);
+    frmData.append("web",web);
+    frmData.append("centro",centro);
+    frmData.append("usuario",usuario);
+    frmData.append("pass",pass);
     
     var xhr = new XMLHttpRequest();
     
-    xhr.open('GET','../pass/'+modo+'.php?id='+id+'&web='+web+'&centro='+centro+'&usuario='+usuario+'&pass='+pass);
+    xhr.open('POST','../pass/'+modo+'.php');
     xhr.addEventListener('load',(datos)=>{
        document.body.innerHTML = datos.target.response;
    })
-    xhr.send();
+    xhr.send(frmData);
     window.opener.location.reload();
     setInterval(function(){window.close()},600);
 }

@@ -201,6 +201,35 @@ public function editar($id) {
     return $datos;
 }
 
+//Devuelve el modal del modal
+public function getModal($id){
+  $datos = "";        
+    $db = Db::conectar();
+    $sentencia = "SELECT * FROM proveedores WHERE id LIKE '".$id."'";
+    $select = $db->prepare($sentencia);
+    $select->execute();
+    $i = 1;
+    while($fila = $select->fetch()){
+      return '
+        <div>
+          <h2  id="sel'.str_replace(' ','',$fila[0]).'">'.$fila[1].'</h2>
+        </div>
+        <div>
+          Nombre: '.$fila[1].'<p/>
+          Marca: '.$fila[2].'<p/>
+          Correo: '.$fila[3].'<p/>
+          Teléfono: '.$fila[4].'<p/>
+          Contacto: '.$fila[5].'<p/>
+          Ciudad: '.$fila[6].'<p/>
+          Tipo: '.$fila[7].'<p/>
+          <a href="./docs/'.$fila[9].'" target="_blank">'.$fila[8].'</a>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="closeModal">CERRAR</button>
+        </div>';
+    }
+}
+
 
 //busca el nombre del usuario si existe
 public function buscar($nombre) {
@@ -219,43 +248,26 @@ public function buscar($nombre) {
     $seleProv->execute();
     $i = 1;
     while($fila = $seleProv->fetch()){
-        $daProv = $daProv .'<tr>
-            <td scope="row" data-label="N" >'.$i++.'</td>
-            <td data-label="PROVEEDOR" >'.strtoupper($fila[1]).'</td>
-            <td data-label="MARCA" >'.strtoupper($fila[2]).'</td>
-            <td data-label="CORREO" ><a href="mailto:'.$fila[3].'">'.$fila[3].'</a></td>
-            <td data-label="TELÉFONO" ><a href="tel:+34 '.$fila[4].'">'.$fila[4].'</a></td>
-            <td data-label="CONTACTO" >'.strtoupper($fila[5]).'</td>
-            <td data-label="EDIT" ><a href="javascript:openWindow(\'./tables/modificar.php?id='.$fila[0].'\')" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-          </svg></a></td>
-          <td data-label="INFO" ><img src="./img/info_black_24dp.svg" class="finger" data-bs-toggle="modal" data-bs-target="#sel'.str_replace(' ','',$fila[0]).'"></td>
-        </tr>
-        <!-- Modal -->
-        <div class="modal fade" id="sel'.str_replace(' ','',$fila[0]).'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="sel'.str_replace(' ','',$fila[0]).'">'.$fila[1].'</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          Nombre: '.$fila[1].'<p/>
-          Marca: '.$fila[2].'<p/>
-          Correo: '.$fila[3].'<p/>
-          Teléfono: '.$fila[4].'<p/>
-          Contacto: '.$fila[5].'<p/>
-          Ciudad: '.$fila[6].'<p/>
-          Tipo: '.$fila[7].'<p/>
-          <a href="./docs/'.$fila[9].'" target="_blank">'.$fila[8].'</a>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
-        </div>
-        </div>
-        </div>
-        </div>';
+        $daProv = $daProv .'
+          <div class="tabla-filas-prov">
+            <div scope="row" data-label="N" class="tabla-celdas-prov">'.$i++.'</div>
+            <div data-label="PROVEEDOR" class="tabla-celdas-prov">'.strtoupper($fila[1]).'</div>
+            <div data-label="MARCA" class="tabla-celdas-prov">'.strtoupper($fila[2]).'</div>
+            <div data-label="CORREO" class="tabla-celdas-prov"><a href="mailto:'.$fila[3].'">'.$fila[3].'</a></div>
+            <div data-label="TELÉFONO" class="tabla-celdas-prov"><a href="tel:+34 '.$fila[4].'">'.$fila[4].'</a></div>
+            <div data-label="CONTACTO" class="tabla-celdas-prov">'.strtoupper($fila[5]).'</div>
+            <div data-label="EDIT" class="tabla-celdas-prov">
+              <a href="javascript:openWindow(\'./tables/modificar.php?id='.$fila[0].'\')" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                </svg>
+              </a>
+            </div>
+            <div data-label="INFO" id="info" class="tabla-celdas-prov">
+              <img src="./img/info_black_24dp.svg" class="finger" data-bs-toggle="modal" alt="'.str_replace(' ','',$fila[0]).'" id="info">
+            </div>
+          </div>';
     }
     
     return $daProv;

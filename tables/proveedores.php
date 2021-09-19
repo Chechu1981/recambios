@@ -5,21 +5,22 @@ $busqueda = new ConProv();
 @$fila = $busqueda->buscar($_GET['find']);
 if(!empty($fila[0])){
 ?>
-<h1>AGENDA</h1>
-<table class="tablaOwn">
-    <thead>
-        <th>N</th>
-        <th>PROVEEDOR</th>
-        <th>MARCA</th>
-        <th>CORREO</th>
-        <th>TELEFONO</th>
-        <th>CONTACTO</th>
-        <th></th>
-        <th></th>
-    </thead>
-    <tbody>
+<div class="table-title">
+    <h1>AGENDA</h1>
+</div>
+<div class="tabla">
+    <div class="tabla-encabezado-prov">
+        <div class="th">N</div>
+        <div class="th">PROVEEDOR</div>
+        <div class="th">MARCA</div>
+        <div class="th">CORREO</div>
+        <div class="th">TELEFONO</div>
+        <div class="th">CONTACTO</div>
+        <div class="th"></div>
+        <div class="th"></div>
+    </div>    
         <?php echo $fila; ?>
-    </tbody>
-</table>
+</div>
+
 <?php
 }

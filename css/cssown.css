@@ -4,16 +4,75 @@
 font-family: 'Josefin Sans', sans-serif;
 }
 
+a{
+    color: black;
+    text-decoration: none;
+}
+
+body{
+    background-image: url(../img/wave.svg);
+    background-repeat: repeat no-repeat;
+    background-position: 0 bottom;
+    transform-origin: center bottom;
+    animation-name: wave;
+    animation-duration: 10s;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes wave {
+    
+}
+
 .contenedor{
     margin: 1% 10%;
 }
 
+/* NAV */
+nav{
+    display:flex;
+    position: sticky;
+    top:0px;
+    background-color:#ffffff;
+    padding:10px
+}
+
+.hamb{
+    display:none;
+}
+
+.nav-body{
+    display:flex;
+}
+
+.item-link{
+    margin-left:10px;
+    background-color:#6c757d;
+    border-radius: 3px;
+    border-radius: 3px;
+    padding: 0 10px;
+    color: azure;
+    padding-top: 15px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.item-link:hover{
+    background-color:black;
+    color:#009fe3;
+    transition: 0.3s;
+}
+
+.btn-new{
+    margin:10px;
+}
+
 .google{
+    margin-left: 10px;
     background-color: white;
     display: inline-flex;
     padding: 8px;
     width: 100%;
-    max-width: 584px;
+    max-width: 100%;
     border-radius: 50px;
     border: 1px solid #dfe1e5;
 }
@@ -45,35 +104,12 @@ font-family: 'Josefin Sans', sans-serif;
     outline: transparent;
 }
 
-@media(max-width: 992px){
-    .tablaOwn thead{
-        display:none;
-    }
-   
-    .tablaOwn, .tablaOwn td, .tablaOwn tbody, .tablaOwn tr{
-        display: block;
-        width: 100%;
-    }
-
-    .tablaOwn tr{
-        border-bottom: 2rem solid rgb(158, 158, 158);
-    }
-
-    .tablaOwn td{
-        text-align:right;
-        padding-left: 50%;
-        position: relative;
-        margin-right: 10px;
-    }
-    
-    .tablaOwn td::before {
-        content: attr(data-label);
-        position: absolute;
-        width: 10%;
-        padding-left: 15px;
-        left: 0;
-    }
+.logo{
+    cursor: pointer;
+    width:max-content;
 }
+
+
 
 .link a{
     margin: 2px;
@@ -135,11 +171,14 @@ span:hover .delete,span:hover .edit{
 }
 
 .finger:hover{
+    border-radius: 50%;
     opacity: 1;
 }
 
 .foot{
-    margin-top: 10px;
+    text-align:right;
+    padding-right: 5%;
+    padding-bottom: 2%;
 }
 
 .footText{
@@ -148,7 +187,7 @@ span:hover .delete,span:hover .edit{
 
 .footBorder{
     height: 10px;
-    border-top: 2px black solid;
+    border-top: 12px black solid;
     box-shadow: black 2px;
     animation-name: pie;
     animation-duration: 20s;
@@ -158,8 +197,8 @@ span:hover .delete,span:hover .edit{
 
 @keyframes pie {
     0%{
-        width: 0%;
-        margin-left: 20%;
+        width: 100%;
+        margin-left: 0%;
     }
     50%{
         margin-left: 0%;
@@ -167,15 +206,16 @@ span:hover .delete,span:hover .edit{
         border-color: #009ee3;
     }
     100%{
-        width: 0%;
-        margin-left: 20%;
+        width: 100%;
+        margin-left: 0%;
     }
 }
 
-#table{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+.table-title{
+    top: 60px;
+    position: sticky;
+    background-color: white;
+    padding: 5px;
 }
 
 .hidden{
@@ -208,12 +248,12 @@ span:hover .delete,span:hover .edit{
 
 .tablaOwn tr:hover img{
     background-color: white;
-    border-radius: 5%;
+    border-radius: 50%;
 }
 
 .tablaOwn a:hover svg{
     background-color: rgb(47, 231, 255);
-    border-radius: 5%;
+    border-radius: 50%;
 }
 
 .tablaOwn tr:hover a,.tablaOwn tr:hover td{
@@ -226,7 +266,7 @@ span:hover .delete,span:hover .edit{
     width:max-content;
     border-bottom: 2px solid black;
     position: sticky;
-    top: 86px;
+    top: 110px;
     z-index: 10;
     height: 50px;
     text-align: center;
@@ -323,20 +363,193 @@ span:hover .delete,span:hover .edit{
 /* TABLA CON CSS */
 
 .tabla{
-    display: grid;
     grid-gap: 3px;
     grid-auto-rows: minmax(100px, auto);
     justify-content: space-around;
 }
+/* TABLA INTERNAS */
 
 .tabla-encabezado{
     display: grid;
     grid-gap: 1.5rem;
-    grid-template-columns: auto auto auto auto auto auto;
+    padding-bottom: 5px;
+    grid-template-columns: 18% 18% 18% 18% 18% 5%;
     font-size: larger;
+    border-bottom: 1px solid;
 }
 
 .tabla-filas{
+    grid-gap: 1.5rem;
     display: grid;
-    grid-template-columns: auto auto auto auto auto auto;
+    grid-template-columns: 18% 18% 18% 18% 18% 5%;
+}
+
+.tabla-celdas{
+    padding: 10px 0 0 5px;
+}
+
+.tabla-filas:hover{
+    background-color: rgb(61, 61, 61);
+    color: honeydew;
+}
+
+/*TABLA PROVEEDORES */
+
+.tabla-encabezado-prov{
+    display: grid;
+    grid-gap: 1.5rem;
+    padding-bottom: 5px;
+    grid-template-columns: 2% 20% 14% 25% 10% 10% 5% 5%;
+    font-size: larger;
+    border-bottom: 1px solid;
+}
+
+.tabla-filas-prov{
+    grid-gap: 1.5rem;
+    display: grid;
+    grid-template-columns: 2% 20% 14% 25% 10% 10% 5% 5%;
+}
+
+.tabla-celdas-prov{
+    padding: 10px 0 0 5px;
+}
+
+.tabla-filas-prov:hover, .tabla-filas-prov:hover a{
+    background-color: rgb(61, 61, 61);
+    color: honeydew;
+}
+
+/* MODAL*/
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 99; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 20%; /* Could be more or less, depending on screen size */
+    border-radius: 5px;
+    box-shadow: 2px 2px 15px black;
+  }
+
+  .modal-content h2{
+      text-align: center;
+  }
+
+  .modal-footer{
+      text-align: end;
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  @media(max-width: 992px){
+    .tabla-encabezado-prov, .tabla-encabezado{
+        display:none;
+    }
+   
+    .tabla-filas-prov{
+        display: block;
+        width: 100%;
+    }
+
+    .tabla-filas-prov{
+        padding-left: 50%;
+        position: relative;
+        margin-right: 10px;
+    }
+    
+    .tabla-filas-prov .tabla-celdas-prov::before {
+        content: attr(data-label);
+        position: absolute;
+        padding-left: 15px;
+        left: 0;
+    }
+
+    .nav-body{
+        display: none;
+    }
+
+    .hamb{
+        display: block;
+        top: 18px;
+        width: 48px;
+        height: 5px;
+        background: #222;
+        position: relative;
+        cursor: pointer;
+    }
+
+    .hamb::before,.hamb::after{
+        width:44px;
+        height:5px;
+        background-color:black;
+        position: absolute;
+        content:'';
+    }
+
+    .hamb::before{
+        top:-11px;
+    }
+
+    .hamb::after{
+        top:11px;
+    }
+
+    .hamb, .hamb::before,.hamb::after,.nav-body{
+        transition: all ease-in-out 0.4s;
+    }
+
+    .hamb.animation{
+        background-color: transparent;
+    }
+
+    .hamb.animation::before{
+        top:0px;
+        transform: rotate(-45deg);
+    }
+
+    .hamb.animation::after{
+        top:0px;
+        transform: rotate(45deg);        
+    }
+
+    .nav-body.animation{
+        display:block;
+        margin-top: 50px;
+        position: fixed;
+        width:100%;
+    }
+
+    .item-link.animation{
+        text-align: center;
+        padding-bottom: 1px;
+        margin-bottom: 1px;
+        margin-left: 0px;;
+    }
 }
