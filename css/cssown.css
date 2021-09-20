@@ -167,6 +167,7 @@ span:hover .delete,span:hover .edit{
 
 .finger{
     cursor:pointer;
+    position:absolute;
     opacity: 0.5;
     margin-left: 10px;
     transition: 0.5s;
@@ -222,57 +223,6 @@ span:hover .delete,span:hover .edit{
 
 .hidden{
     display: none;
-}
-
-.tablaOwn{
-    border-collapse: collapse;
-    width: 100%;
-}
-
-.tablaOwn tbody tr:nth-child(even){
-    background-color: #f5f5f5;
-}
-
-.tablaOwn td{
-    padding: 1rem 2rem 1rem 1rem;
-    border-bottom: 2px solid #989898;
-}
-
-.tablaOwn td,.tablaOwn a{
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.tablaOwn tr:hover span img{
-    background-color: white;
-    border-radius: 50%;
-}
-
-.tablaOwn tr:hover img{
-    background-color: white;
-    border-radius: 50%;
-}
-
-.tablaOwn a:hover svg{
-    background-color: rgb(47, 231, 255);
-    border-radius: 50%;
-}
-
-.tablaOwn tr:hover a,.tablaOwn tr:hover td{
-    background-color: rgb(61, 61, 61);
-    color: honeydew;
-    font-size: medium;
-}
-
-.tablaOwn thead{
-    width:max-content;
-    border-bottom: 2px solid black;
-    position: sticky;
-    top: 110px;
-    z-index: 10;
-    height: 50px;
-    text-align: center;
-    background-color: #6c757d;
 }
 
 .navBarOwn{
@@ -422,18 +372,33 @@ span:hover .delete,span:hover .edit{
     color:#f2fbff;
 }
 
+.tabla-celdas-prov:nth-child(even) a{
+    color: rgb(0, 0, 0);
+}
+
 .tabla-filas-prov:nth-child(odd){
     background-color:rgb(255 255 255);
     color:black;
 }
 
+.tabla-celdas-prov:nth-child(odd) a{
+    color: white;
+}
+
 .tabla-celdas-prov{
+    height:1.7rem;
     padding: 10px 0 0 5px;
 }
 
-.tabla-filas-prov:hover, .tabla-filas-prov:hover a{
+.tabla-filas-prov:hover, 
+.tabla-filas-prov:hover a{
     background-color: rgb(61, 61, 61);
     color: honeydew;
+}
+
+.tabla-filas-prov img:hover{
+    background-color:white;
+    border-radius: 50%;
 }
 
 /* MODAL*/
