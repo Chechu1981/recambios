@@ -1,4 +1,4 @@
-<div class="card" id="openAgenda" onclick="openAgenda()">
+<div class="card" id="agendaMain" >
     <div>
         <h3>AGENDA</h3>
     </div>
@@ -9,7 +9,7 @@
         Teléfonos, contactos, correos electrónicos, whatsapp, ...
     </div>
 </div>
-<div class="card" id="openPass" onclick="openPass()" >
+<div class="card" id="passMain" >
     <div>
         <h3>CONTRASEÑAS</h3>
     </div>
@@ -20,7 +20,7 @@
         Contraseñas de páginas, correos, centros, proveedores, ...
     </div>
 </div>
-<div class="card" id="internasCard" onclick="openInternas()">
+<div class="card" id="internasMain">
     <div>
         <h3>INTERNAS</h3>
     </div>
@@ -31,7 +31,7 @@
         Órdenes internas del mes acutal.
     </div>
 </div>
-<div class="card" id="openEnlaces" onclick="openEnlaces()">
+<div class="card" id="linksMain">
     <div>
         <h3>ENLACES</h3>
     </div>
@@ -42,7 +42,7 @@
         Enlaces más frecuentes agrupados por usos.
     </div>
 </div>
-<div class="card" id="openCalc" onclick="openCalc()">
+<div class="card" id="calcMain">
     <div>
         <h3>CALCULADORA</h3>
     </div>

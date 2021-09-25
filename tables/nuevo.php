@@ -1,9 +1,5 @@
-<link href="../css/bootstrap.min.css" rel="stylesheet">
-<script src="../js/jquery-3.6.0.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
 <div class="container">
     <legend>Nueva entrada</legend>
-
 
     <div class="row g-3 align-items-center m-1">
         <div class="col-auto">
@@ -121,4 +117,3 @@
     <input type="hidden" id="modo" value="insert"></input>
     <button class="btn btn-primary m-4 float-end" onclick="guardar()">Guardar</button>
 </div>
-<script src="../js/jsfrm.js"></script>

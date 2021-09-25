@@ -1,197 +1,108 @@
 "use strict";
-const table = document.getElementById('table');
+
+const $ = (element) => document.getElementById(element);
+const table = $('table');
 const oHead = document.getElementsByTagName('HEAD').item(0); 
 const oScript= document.createElement("script");
-const buscar = document.getElementById('search');
-buscar.focus();
-let respuesta2 ='';
+$('search').focus();
 
-// CARGO AJAX
-
-let xhr,xhr1;
-if(window.XMLHttpRequest){
-    xhr1 = new XMLHttpRequest();
-    xhr = new XMLHttpRequest();
-}else{
-    xhr = new ActiveXObject("Microsoft.XMLHTTP");
-    xhr1 = new ActiveXObject("Microsoft.XMLHTTP");
-} 
-
-//buscar
- 
-let findCust = document.getElementById('search').addEventListener('keyup',(e) => {
-    table.style.display = 'block';
-    xhr.open('GET','./tables/proveedores.php?find='+e.target.value);
-    xhr.addEventListener('load',(data) =>{});
-    xhr.send();
-    xhr1.open('GET','./pass/pass.php?find='+e.target.value);
-    xhr1.addEventListener('load',(data1) =>{
-        respuesta2 = data1.target.response;
-    });
-    xhr1.send();  
-});
-
-let openWindow = (target) => {
-    let options = 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=yes, width=800, height=600, top=85, left=140';
-    window.open(target,'Editar',options);
-}
-
-let openInternas = (e) => {
-    (e == true) ? menuOcultar() : '';
-    table.style.display ='block';
-    buscar.disabled = false;
-    xhr.open('GET','./internas/internas.php');
-    xhr.addEventListener('load',(data) =>{});
-    xhr.send(); 
-}
-
-let intNew = document.getElementById('intNew');
-    intNew.addEventListener('click',()=>{
-        xhr.open('GET','./internas/nuevo.php');
-        xhr.addEventListener('load',(data) =>{
-            let options = 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=yes, width=800, height=600, top=85, left=140';
-            window.open('./internas/nuevo.php','Nuevo',options);            
-        });
-    xhr.send();
-});
-
-let openAgenda = (e) => {
-    (e == true) ? menuOcultar() : '';
-    table.style = 'display:block';
-    document.getElementById('search').disabled = false;
-    xhr.open('GET','./tables/proveedores.php');
-    xhr.addEventListener('load',(data) =>{});
-    xhr.send();
-    document.getElementById('search').focus();
-};
-
-let nuevo = document.getElementById('new');
-    nuevo.addEventListener('click',()=>{
-        xhr.open('GET','./tables/proveedores.php');
-        xhr.addEventListener('load',(data) =>{
-            let options = 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=yes, width=800, height=600, top=85, left=140';
-            window.open('./tables/nuevo.php','Nuevo',options);  
-        });
-    xhr.send();
-});
-
-let openPass = (e) => {
-    (e == true) ? menuOcultar() : '';
-    table.style.display = 'block';
-    document.getElementById('search').disabled = false;
-    xhr.open('GET','./pass/pass.php');
-    xhr.addEventListener('load',(data) =>{});
-    xhr.send();
-    document.getElementById('search').focus();
-}
-
-let pssNuevo = document.getElementById('passNew');
-    pssNuevo.addEventListener('click',()=>{
-        xhr.open('GET','./tables/proveedores.php');
-        xhr.addEventListener('load',(data) =>{
-            let options = 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=yes, width=800, height=600, top=85, left=140';
-            window.open('./pass/nuevo.php','Nuevo',options);     
-        });
-    xhr.send();
-});
-
-let openEnlaces = (e) => {
-    (e == true) ? menuOcultar() : '';
-    table.style = 'display:block';
-    document.getElementById('search').disabled = false;
-    xhr.open('GET','./links/links.php');
-    xhr.addEventListener('load',(data) =>{});
-    xhr.send();
-    document.getElementById('search').focus();
-}
-
-let linksNuevo = document.getElementById('linkNew');
-    linksNuevo.addEventListener('click',()=>{
-        xhr.open('GET','./links/nuevo.php');
-        xhr.addEventListener('load',(data) =>{
-            let options = 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=yes, width=800, height=600, top=85, left=140';
-            window.open('./links/nuevo.php','Nuevo',options);
-        });
-    xhr.send();
-});
-
-let copiar = (id) =>{
-    let texto = document.getElementById(id);
-    texto.style = "display: block";
-    texto.select();
-    document.execCommand("copy");
-    texto.style = "display:none";
-}
-
-//CARGA DEL INICIO
-
-let firstPage = (ini) => {
-    if(ini == true){
-        respuesta2 = '';
-    }
-    buscar.disabled = false;
-    xhr.open('POST','./main/cards.php');
+// LOAD AJAX OBJECT
+let createObjectXhr = (target,data) => {
+    let xhr,str;
+    (window.XMLHttpRequest) ? xhr = new XMLHttpRequest() : xhr = new ActiveXObject("Microsoft.XMLHTTP");
+    console.log(target);
+    xhr.open('POST',target,data);
     xhr.addEventListener('load',(data)=>{
-        table.innerHTML = data.target.response + respuesta2;
+        str = data.target.response;
     });
-    xhr.send();
+    xhr.send(data);
+    return str;
+}
+
+// SEARCH
+$('search').addEventListener('click',() => {
+    $('search').select();
+})
+ 
+$('search').addEventListener('keyup',(e) => {
+    table.style.display = 'block';
+    let prov = createObjectXhr('./tables/proveedores.php?find='+e.target.value);
+    let password = createObjectXhr('./pass/pass.php?find='+e.target.value);
+    table.innerHTML =  prov + password;
+});
+
+let openLink = (e,target,event) =>{
+    menuOcultar();
+    let openNew = (add)=>{
+        const modal = $("myModal");
+        modal.style.display = "block";
+        modal.firstElementChild.innerHTML = createObjectXhr(add);
+    };
+    let getTable = (evt,add) =>{
+        (evt == true) ? $('search').disabled = true : $('search').disabled = false;
+        table.style.display ='block';
+        table.innerHTML =  createObjectXhr(add);
+    };
+    (event == undefined) ? getTable(e,target) : $(event).addEventListener('click',openNew(target));
+    document.getElementsByTagName('input')[0].focus();
+}
+
+//LOAD HOME
+let firstPage = () => {
+    $('search').disabled = false;
+    table.innerHTML = createObjectXhr('./main/cards.php');
 }
 document.body.onload = firstPage(true);
-window.onload = document.getElementById('search').focus();
-// CALCULADORA
+window.onload = $('search').focus();
 
-let openCalc = (e) => {
-    (e == true) ? menuOcultar() : '';
-    table.style = 'display:block';
-    document.getElementById('search').disabled = true;
-    xhr.open('GET','./calc/calc.php');
-    xhr.addEventListener('load',(data) =>{});
-    xhr.send();
-    document.getElementById('search').focus();
-    setTimeout(() => {
-        oScript.type = "text/javascript"; 
-        oScript.src="./js/calc.js"; 
-        oHead.appendChild( oScript);
-    }, 200);
-    
-}
-
-let abrirmodal = (id,tb) => {
+// OPEN MODAL
+let abrirmodal = (id,tb,typ) => {
+    const modal = $("myModal");
+    let tp = 'modal';
     let tabla = 'tables';
-    (tb == 2) ? tabla = 'pass' : ''; 
-    const modal = document.getElementById("myModal");
-    xhr.open('GET',`./${tabla}/modal.php?id=${id}`);
-    xhr.addEventListener('load',(data) =>{
-        modal.style.display = "block";
-        modal.firstElementChild.innerHTML = "Hola mundo";
-        modal.firstElementChild.innerHTML = data.target.response;
-    });
-    xhr.send();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+    (tb == 'pass') ? tabla = 'pass' : ''; 
+    (typ == 'edit') ? tp = 'modificar' : '';
+    modal.style.display = "block";
+    modal.firstElementChild.innerHTML = createObjectXhr(`./${tabla}/${tp}.php?id=${id}`);
 }
 
+// LISTEN CLICKS
 document.body.addEventListener('click',(e)=>{
-    (e.target.id == "calc") ? openCalc(true) : "";
-    (e.target.alt == "ocasionplus") ? firstPage(true) : "";
-    (e.target.id == "links") ? openEnlaces(true) : "";
-    (e.target.id == "pass") ? openPass(true) : "";
-    (e.target.id == "inicio") ? openAgenda(true) : "";
-    (e.target.id == "internas") ? openInternas(true) : "";
-    (e.target.id == "info") ? abrirmodal(e.target.alt,1) : "";
-    (e.target.id == "Pinfo") ? abrirmodal(e.target.alt,2) : "";
-    (e.target.id == "closeModal") ? document.getElementById("myModal").style.display = "none" : "";
-    (e.target.id == "myModal") ? document.getElementById("myModal").style.display = "none" : "";    
+    (e.target.id == "new") ? openLink(true,'./tables/nuevo.php','new') : "";
+    (e.target.id == "passNew") ? openLink(true,'./pass/nuevo.php','passNew') : "";
+    (e.target.id == "linkNew") ? openLink(true,'./links/nuevo.php','linkNew') : "";
+    (e.target.id == "intNew") ? openLink(true,'./internas/nuevo.php','intNew') : "";
+    (e.target.id == "calc" || e.target.id == "calcMain") ? openLink(true,'./calc/calc.php') : "";
+    (e.target.alt == "ocasionplus") ? firstPage(false) : "";
+    (e.target.id == "edit") ? abrirmodal(e.target.alt,'tab','edit') : "";
+    (e.target.id == "links" || e.target.id == "linksMain") ? openLink(false,'./links/links.php') : "";
+    (e.target.id == "pass" || e.target.id == "passMain") ? openLink(false,'./pass/pass.php') : "";
+    (e.target.id == "agenda" || e.target.id == "agendaMain") ? openLink(false,'./tables/proveedores.php') : "";
+    (e.target.id == "internas" || e.target.id == "internasMain") ? openLink(false,'./internas/internas.php') : "";
+    (e.target.id == "info") ? abrirmodal(e.target.alt,'tab','info') : "";
+    (e.target.id == "Pinfo") ? abrirmodal(e.target.alt,'pass','info') : "";
+    (e.target.id == "closeModal") ? $("myModal").style.display = "none" : "";
+    (e.target.id == "myModal") ? $("myModal").style.display = "none" : "";
 });
 
-// Acción del botón de hamburguesa
-
+// HAMB ICON CLICK ACCION
 const menuOcultar = () => {
-    document.getElementById('hamb').classList.toggle('animation');
-    table.style.display = "none";
-    document.getElementById('nav-body').classList.toggle('animation');
+    $('hamb').classList.toggle('animation');
+    (window.outerWidth < 992) ? table.style.display = "none" : '';
+    $('nav-body').classList.toggle('animation');
     const counte = document.getElementsByClassName('item-link');
     for(let i = 0; i < counte.length;i++){
         counte[i].classList.toggle('animation');
     }
 }
 
-const hamburguer = document.getElementById('hamb').addEventListener('click',menuOcultar);
+const hamburguer = $('hamb').addEventListener('click',menuOcultar);
+
+// COPIAR EN PORTAPAPELES
+let copiar = (id) =>{
+    let texto = $(id);
+    texto.style = "display: block";
+    texto.select();
+    document.execCommand("copy");
+    texto.style = "display:none";
+}

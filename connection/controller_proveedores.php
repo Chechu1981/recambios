@@ -38,8 +38,7 @@ public function delete($id){
   $sentencia = "DELETE FROM `proveedores` WHERE id = '".$id."'";
   $select = $db->prepare($sentencia);
   $select->execute();
-  @unlink('../docs/'.$nameFile);
-  echo "Eliminado con éxito.";
+  return true;
 }
 
     //modifica los campos
@@ -80,8 +79,6 @@ public function editar($id) {
         $datos = $datos .'
         <div class="container">
         <legend>Editar '.$fila[1].'</legend>
-        
-        
         <div class="row g-3 align-items-center m-1">
           <div class="col-auto">
             <label for="inputPassword6" class="col-form-label">Nombre</label>
@@ -195,7 +192,7 @@ public function editar($id) {
       </div>
       <input type="hidden" id="modo" value="update"></input>
       <button class="btn btn-primary m-4" onclick="guardar()" >Guardar</button>
-      <button class="btn btn-secondary m-4 float-end" onclick="eliminar()" >Eliminar</button>
+      <button class="btn btn-secondary m-4 float-end" onclick="eliminar('.$fila[0].')" >Eliminar</button>
       </div>';
       } 
     return $datos;
@@ -256,16 +253,11 @@ public function buscar($nombre) {
             <div data-label="CORREO" class="tabla-celdas-prov"><a href="mailto:'.$fila[3].'">'.$fila[3].'</a></div>
             <div data-label="TELÉFONO" class="tabla-celdas-prov"><a href="tel:+34 '.$fila[4].'">'.$fila[4].'</a></div>
             <div data-label="CONTACTO" class="tabla-celdas-prov">'.strtoupper($fila[5]).'</div>
-            <div data-label="EDIT" class="tabla-celdas-prov">
-              <a href="javascript:openWindow(\'./tables/modificar.php?id='.$fila[0].'\')" >
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                </svg>
-              </a>
+            <div data-label="EDIT" alt="'.$fila[0].'" id="edit" class="tabla-celdas-prov">
+              <img src="./img/outline_edit_black_48dp.png" class="finger" alt="'.str_replace(' ','',$fila[0]).'" id="edit">
             </div>
-            <div data-label="INFO" id="info" class="tabla-celdas-prov">
-              <img src="./img/info_black_24dp.svg" class="finger" data-bs-toggle="modal" alt="'.str_replace(' ','',$fila[0]).'" id="info">
+            <div data-label="INFO" class="tabla-celdas-prov">
+              <img src="./img/info_black_24dp.svg" class="finger" alt="'.str_replace(' ','',$fila[0]).'" id="info">
             </div>
           </div>';
     }

@@ -30,21 +30,21 @@
         <!-- Nav tabs -->
         <nav>
             <div class="nav-body" id="nav-body">
-                <div class="item-link" id="inicio">
+                <div class="item-link" id="agenda">
                     Agenda
-                <div class="btn-new" id="new"></div>
+                <div class="btn-new" id="new">N</div>
                 </div>                
                 <div class="item-link" id="pass">
                     Contraseñas
-                    <div class="btn-new" id="passNew"></div>
+                    <div class="btn-new" id="passNew">N</div>
                 </div>
                 <div class="item-link" id="links">
                     Enlaces
-                    <div class="btn-new" id="linkNew"></div>
+                    <div class="btn-new" id="linkNew">N</div>
                 </div>
                 <div class="item-link" id="internas">
                     Internas
-                    <div class="btn-new" id="intNew"></div>
+                    <div class="btn-new" id="intNew">N</div>
                 </div>
                 <div class="item-link" id="calc">
                     Calculadora
@@ -70,6 +70,7 @@
    Jesús Martín <?php echo date("Y"); ?>
     </footer>
     <script src="./js/jsown.js"></script>
+    <script src="./js/jsfrm.js"></script>
 </body>
 
 </html>

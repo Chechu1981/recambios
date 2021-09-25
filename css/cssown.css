@@ -48,6 +48,7 @@ nav{
 
 .item-link{
     margin-left:10px;
+    display: inherit;
     background-color:#6c757d;
     border-radius: 3px;
     border-radius: 3px;
@@ -65,7 +66,11 @@ nav{
 }
 
 .btn-new{
-    margin:10px;
+    margin-left:10px;
+}
+
+.btn-new:hover{
+    color:red;
 }
 
 .google{
@@ -73,7 +78,7 @@ nav{
     background-color: white;
     display: inline-flex;
     padding: 8px;
-    width: 100%;
+    width: 70%;
     max-width: 100%;
     border-radius: 50px;
     border: 1px solid #dfe1e5;
@@ -94,6 +99,7 @@ nav{
 }
 
 .google input{
+    font-size: 1.3rem;
     border:none;
     height: 24px;
     width: 90%;
@@ -166,6 +172,7 @@ span:hover .delete,span:hover .edit{
 }
 
 .finger{
+    width: 24px;
     cursor:pointer;
     position:absolute;
     opacity: 0.5;

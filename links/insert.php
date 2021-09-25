@@ -1,7 +1,7 @@
 <?php 
 include_once('../connection/controller_links.php');
 
-$datos = array($_GET['id'],$_GET['link'],$_GET['type'],$_GET['name'],$_GET['icon']);
+$datos = array($_POST['id'],$_POST['link'],$_POST['type'],$_POST['name'],$_POST['icon']);
 
 $busqueda = new ConLinks();
 

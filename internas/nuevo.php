@@ -1,6 +1,3 @@
-<link href="../css/bootstrap.min.css" rel="stylesheet">
-<script src="../js/jquery-3.6.0.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
 <div class="container-xs-12">
     <legend>Nueva entrada</legend>        
         
