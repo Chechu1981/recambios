@@ -64,53 +64,24 @@ let eliminarLink = (id) =>{
     $("myModal").style.display = "none";
 }
 
-let guardarInt = () =>{
-    let centro = $('centro').value;
-    let mecanica = $('mecanica').value;
-    let carroceria = $('carroceria').value;
-    let limpieza = $('limpieza').value;
-    let ventas = $('ventas').value;
+let guardarInt = (id) =>{
+    let frmData = new FormData();
+    frmData.append('id',id);
+    frmData.append('centro',$('centro').value);
+    frmData.append('mecanica',$('mecanica').value);
+    frmData.append('carroceria',$('carroceria').value);
+    frmData.append('limpieza',$('limpieza').value);
+    frmData.append('ventas',$('ventas').value);
     let modo = $('modo').value;
-
-    function getParameterByName(name) {
-        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-        results = regex.exec(location.search);
-        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-    }
-    
-    let id = getParameterByName('id');
-    let datos = {id,centro,mecanica,carroceria,limpieza,ventas};
-    
-    var xhr = new XMLHttpRequest();
-    
-    xhr.open('GET','../internas/'+modo+'.php?id='+id+'&centro='+centro+'&mecanica='+mecanica+'&carroceria='+carroceria+'&limpieza='+limpieza+'&ventas='+ventas);
-    xhr.addEventListener('load',(datos)=>{
-       document.body.innerHTML = datos.target.response;
-   })
-    xhr.send();
-    window.opener.location.reload();
-    setInterval(function(){window.close()},600);
+    createObjectXhr('./internas/'+modo+'.php',frmData);
+    $("myModal").style.display = "none";
+    openLink(false,'./internas/internas.php');
 }
 
-let eliminarInt = () =>{
-    function getParameterByName(name) {
-        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-        results = regex.exec(location.search);
-        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-    }
-    
-    let id = getParameterByName('id');
-    //let datos = {id,nombre,marca,mail,tlfn,contacto,ciudad,tipo};
-    
-    var xhr = new XMLHttpRequest();
-    
-    xhr.open('GET','../internas/eliminar.php?id='+id);
-    xhr.addEventListener('load',(id)=>{
-       document.body.innerHTML = datos.target.response;
-    })
-    xhr.send();
-    window.opener.location.reload();
-    setInterval(function(){window.close()},600);
+let eliminarInt = (id) =>{
+    let frmData = new FormData();
+    frmData.append('id',id);
+    createObjectXhr('./internas/eliminar.php',frmData);
+    $("myModal").style.display = "none";
+    openLink(false,'./internas/internas.php');
 }

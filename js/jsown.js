@@ -65,6 +65,7 @@ let abrirmodal = (id,tb,typ) => {
     frmData.append('id',id);
     modal.style.display = "block";
     modal.firstElementChild.innerHTML = createObjectXhr(`./${tb}/${typ}.php`,frmData);
+    console.log(id,tb,typ);
 }
 
 // LISTEN CLICKS
@@ -78,6 +79,7 @@ document.body.addEventListener('click',(e)=>{
     (e.target.id == "edit") ? abrirmodal(e.target.alt,'tables','modificar') : "";
     (e.target.id == "Pedit") ? abrirmodal(e.target.alt,'pass','modificar') : "";
     (e.target.id == "Ledit") ? abrirmodal(e.target.alt,'links','modificar') : "";
+    (e.target.id == "Iedit") ? abrirmodal(e.target.alt,'internas','modificar') : "";
     (e.target.id == "links" || e.target.id == "linksMain") ? openLink(false,'./links/links.php') : "";
     (e.target.id == "pass" || e.target.id == "passMain") ? openLink(false,'./pass/pass.php') : "";
     (e.target.id == "agenda" || e.target.id == "agendaMain") ? openLink(false,'./tables/proveedores.php') : "";

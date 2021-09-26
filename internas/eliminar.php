@@ -3,4 +3,4 @@ include_once('../connection/controller_int.php');
 
 $busqueda = new ConInt();
 
-$fila = $busqueda->delete($_GET['id']);
+$fila = $busqueda->delete($_POST['id']);
