@@ -10,7 +10,7 @@ class ConPass{
     //Nueva entrada
     public function insert($entrada){
         $db = Db::conectar();
-        $sentencia = "INSERT INTO password (`web`, `centro`, `usuario`, `pass`) VALUES ('$entrada[1]', '$entrada[2]','$entrada[3]','$entrada[4]')";
+        $sentencia = "INSERT INTO password (`web`, `centro`, `usuario`, `pass`) VALUES ('$entrada[0]', '$entrada[1]','$entrada[2]','$entrada[3]')";
         $select = $db->prepare($sentencia);
         $select->execute();
         echo "Añadido con éxito.";
@@ -105,7 +105,7 @@ class ConPass{
 
       <input type="hidden" id="modo" value="update"></input>
       <button class="btn btn-primary m-4" onclick="guardarPass()" >Guardar</button>
-      <button class="btn btn-secondary m-4 float-end" onclick="eliminarPass()" >Eliminar</button>
+      <button class="btn btn-secondary m-4 float-end" onclick="eliminarPass('.$fila[0].')" >Eliminar</button>
       </div>';
       } 
       return $datos;
@@ -157,8 +157,8 @@ public function getModal($id){
             <div data-label="USUARIO" class="tabla-celdas-prov">'.$fila[3].'<input type="text" id="1'.$fila[0].'" value="'.$fila[3].'" class="hidden"><img src="./img/content_copy_black_24dp.svg" class="finger" onclick="copiar(1'.$fila[0].')" ></div>
             <div data-label="CONTRASEÑA" class="tabla-celdas-prov">'.$fila[4].'<input type="text" id="2'.$fila[0].'" value="'.$fila[4].'" class="hidden">
               <img src="./img/content_copy_black_24dp.svg" class="finger" onclick="copiar(2'.$fila[0].')" ></div>
-            <div data-label="EDITAR" id="'.$fila[0].'" alt="edit" class="tabla-celdas-prov">
-              <img src="./img/outline_edit_black_48dp.png" class="finger" alt="'.str_replace(' ','',$fila[0]).'" id="edit">
+            <div data-label="EDITAR" id="'.$fila[0].'" alt="Pedit" class="tabla-celdas-prov">
+              <img src="./img/outline_edit_black_48dp.png" class="finger" alt="'.str_replace(' ','',$fila[0]).'" id="Pedit">
             </div>
             <div data-label="INFO" alt="'.str_replace(' ','',$fila[0]).'" id="Pinfo" class="tabla-celdas-prov">
               <img class="finger" src="./img/info_black_24dp.svg" alt="'.str_replace(' ','',$fila[0]).'" id="Pinfo">

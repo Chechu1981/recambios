@@ -6,29 +6,40 @@ const oHead = document.getElementsByTagName('HEAD').item(0);
 const oScript= document.createElement("script");
 $('search').focus();
 
+
 // LOAD AJAX OBJECT
 let createObjectXhr = (target,data) => {
     let xhr,str;
     (window.XMLHttpRequest) ? xhr = new XMLHttpRequest() : xhr = new ActiveXObject("Microsoft.XMLHTTP");
-    console.log(target);
-    xhr.open('POST',target,data);
-    xhr.addEventListener('load',(data)=>{
-        str = data.target.response;
+    xhr.open('POST',target,false);    
+    xhr.addEventListener('load',(e)=>{
+        str = e.target.response;
     });
     xhr.send(data);
     return str;
 }
 
+//LOAD HOME
+let firstPage = () => {
+    $('search').disabled = false;
+    table.innerHTML = createObjectXhr('./main/cards.php',true);
+}
+firstPage();
+
 // SEARCH
 $('search').addEventListener('click',() => {
     $('search').select();
 })
+
+let findRegister = (target) =>{
+    let prov = createObjectXhr('./tables/proveedores.php?find='+target);
+    let password = createObjectXhr('./pass/pass.php?find='+target);
+    return prov + password;
+}
  
 $('search').addEventListener('keyup',(e) => {
-    table.style.display = 'block';
-    let prov = createObjectXhr('./tables/proveedores.php?find='+e.target.value);
-    let password = createObjectXhr('./pass/pass.php?find='+e.target.value);
-    table.innerHTML =  prov + password;
+    table.style.display = 'block';    
+    table.innerHTML =  findRegister(e.target.value);
 });
 
 let openLink = (e,target,event) =>{
@@ -47,23 +58,13 @@ let openLink = (e,target,event) =>{
     document.getElementsByTagName('input')[0].focus();
 }
 
-//LOAD HOME
-let firstPage = () => {
-    $('search').disabled = false;
-    table.innerHTML = createObjectXhr('./main/cards.php');
-}
-document.body.onload = firstPage(true);
-window.onload = $('search').focus();
-
 // OPEN MODAL
 let abrirmodal = (id,tb,typ) => {
     const modal = $("myModal");
-    let tp = 'modal';
-    let tabla = 'tables';
-    (tb == 'pass') ? tabla = 'pass' : ''; 
-    (typ == 'edit') ? tp = 'modificar' : '';
+    let frmData = new FormData();
+    frmData.append('id',id);
     modal.style.display = "block";
-    modal.firstElementChild.innerHTML = createObjectXhr(`./${tabla}/${tp}.php?id=${id}`);
+    modal.firstElementChild.innerHTML = createObjectXhr(`./${tb}/${typ}.php`,frmData);
 }
 
 // LISTEN CLICKS
@@ -74,13 +75,15 @@ document.body.addEventListener('click',(e)=>{
     (e.target.id == "intNew") ? openLink(true,'./internas/nuevo.php','intNew') : "";
     (e.target.id == "calc" || e.target.id == "calcMain") ? openLink(true,'./calc/calc.php') : "";
     (e.target.alt == "ocasionplus") ? firstPage(false) : "";
-    (e.target.id == "edit") ? abrirmodal(e.target.alt,'tab','edit') : "";
+    (e.target.id == "edit") ? abrirmodal(e.target.alt,'tables','modificar') : "";
+    (e.target.id == "Pedit") ? abrirmodal(e.target.alt,'pass','modificar') : "";
+    (e.target.id == "Ledit") ? abrirmodal(e.target.alt,'links','modificar') : "";
     (e.target.id == "links" || e.target.id == "linksMain") ? openLink(false,'./links/links.php') : "";
     (e.target.id == "pass" || e.target.id == "passMain") ? openLink(false,'./pass/pass.php') : "";
     (e.target.id == "agenda" || e.target.id == "agendaMain") ? openLink(false,'./tables/proveedores.php') : "";
     (e.target.id == "internas" || e.target.id == "internasMain") ? openLink(false,'./internas/internas.php') : "";
-    (e.target.id == "info") ? abrirmodal(e.target.alt,'tab','info') : "";
-    (e.target.id == "Pinfo") ? abrirmodal(e.target.alt,'pass','info') : "";
+    (e.target.id == "info") ? abrirmodal(e.target.alt,'tables','modal') : "";
+    (e.target.id == "Pinfo") ? abrirmodal(e.target.alt,'pass','modal') : "";
     (e.target.id == "closeModal") ? $("myModal").style.display = "none" : "";
     (e.target.id == "myModal") ? $("myModal").style.display = "none" : "";
 });
