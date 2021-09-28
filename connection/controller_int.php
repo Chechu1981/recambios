@@ -46,7 +46,6 @@ class ConInt{
         <div class="container">
         <legend>Editar '.utf8_encode($fila[3]).'</legend>
         
-        
         <div class="row g-3 align-items-center m-1">
         <div class="col-auto">
             <label for="inputPassword6" class="col-form-label">Centro</label>

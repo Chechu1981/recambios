@@ -109,7 +109,7 @@ class ConLinks{
 
     //Busca un registro
 public function search($nombre){
-    $datos = '<ul id="myTab">';
+    $datos = '<ul id="myTab" class="links">';
     $db = Db::conectar();
     
     $grupos = "SELECT * FROM links
@@ -128,7 +128,7 @@ public function search($nombre){
     
     $datos = $datos.'
     <li>
-        <button id="'.utf8_encode(substr($fila[2],2)).'-tab" type="button" role="tab">'.utf8_encode(substr($fila[2],2)).'</button>
+        <button id="'.utf8_encode(substr($fila[2],2)).'" type="button" name="linkButton">'.utf8_encode(substr($fila[2],2)).'</button>
     </li>';
     $i++;
     }
@@ -146,7 +146,7 @@ public function search($nombre){
 		$colapsed = " ";
 	}
 	
-	$datos = $datos .'<div id="'.substr($fila[2],2).'"  >';
+	$datos = $datos .'<div id="'.substr($fila[2],2).'" class="block" >';
     	
         $enlaces = "SELECT * FROM links
         WHERE tipo LIKE '".$fila[2]."'

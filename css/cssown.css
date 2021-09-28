@@ -457,6 +457,44 @@ span:hover .delete,span:hover .edit{
     cursor: pointer;
   }
 
+  /* TABLA ENLACES */
+
+  .links{
+      list-style: none;
+      display: flex;
+      gap: 4px
+ }
+
+ .links button{
+    border: none;
+    background-color: #6c757d;
+    padding: 10px;
+    border-radius: 4px;
+    color: white;
+ }
+
+ .links button:hover{
+    background-color: black;
+    color: #009fe3;
+    transition: 0.3s;
+    cursor: pointer;
+ }
+
+ .links .active{
+    background-color: black;
+    color: #009fe3;
+    transition: 0.3s;
+ }
+
+ #myTabContent{
+     display: flex;
+     text-align: left;
+ }
+
+ .show{display: block;}
+
+ .hide{display:none}
+
   @media(max-width: 992px){
     .contenedor #table{
         display: flex;

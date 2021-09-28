@@ -68,6 +68,19 @@ let abrirmodal = (id,tb,typ) => {
     console.log(id,tb,typ);
 }
 
+//Toggle tabs links
+
+let changeTab = (id) => {
+    Array.from(document.getElementsByTagName('button')).map((e) => e.className = '');
+    console.log(id);
+    Array.from(document.getElementsByClassName('block')).map((e) =>{
+        e.className = "block hide";
+        console.log(e.id);
+        (e.id == id) ? e.className = "block show": e.className = "block hide";
+    });
+    $(id).className = "active";
+}
+
 // LISTEN CLICKS
 document.body.addEventListener('click',(e)=>{
     (e.target.id == "new") ? openLink(true,'./tables/nuevo.php','new') : "";
@@ -88,6 +101,7 @@ document.body.addEventListener('click',(e)=>{
     (e.target.id == "Pinfo") ? abrirmodal(e.target.alt,'pass','modal') : "";
     (e.target.id == "closeModal") ? $("myModal").style.display = "none" : "";
     (e.target.id == "myModal") ? $("myModal").style.display = "none" : "";
+    (e.target.name == "linkButton") ? changeTab(e.target.innerText) : "";
 });
 
 // HAMB ICON CLICK ACCION
