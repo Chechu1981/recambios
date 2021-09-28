@@ -9,7 +9,7 @@ a{
     text-decoration: none;
 }
 
-body{
+/*body{
     background-image: url(../img/wave.svg);
     background-repeat: repeat no-repeat;
     background-position: 0 bottom;
@@ -17,7 +17,7 @@ body{
     animation-name: wave;
     animation-duration: 10s;
     animation-timing-function: ease-in-out;
-}
+}*/
 
 @keyframes wave {
     
@@ -174,8 +174,6 @@ span:hover .delete,span:hover .edit{
 .finger{
     width: 24px;
     cursor:pointer;
-    position:absolute;
-    opacity: 0.5;
     margin-left: 10px;
     transition: 0.5s;
 }
@@ -356,7 +354,7 @@ span:hover .delete,span:hover .edit{
 
 /*TABLA PROVEEDORES */
 
-.tabla-encabezado-prov{
+.tabla-encabezado-prov, .tabla-encabezado-con{
     padding: 5px 0;
     position: sticky;
     top:123px;
@@ -368,13 +366,23 @@ span:hover .delete,span:hover .edit{
     border-bottom: 1px solid;
 }
 
+.tabla-encabezado-con{
+    grid-template-columns: 2% 10% 16% 30% 20% 5% 5%;
+}
+
+.tabla-filas-con{
+    grid-gap: 1.5rem;
+    display: grid;
+    grid-template-columns: 2% 10% 16% 30% 20% 5% 5%;
+}
+
 .tabla-filas-prov{
     grid-gap: 1.5rem;
     display: grid;
     grid-template-columns: 2% 20% 14% 25% 10% 10% 5% 5%;
 }
 
-.tabla-filas-prov:nth-child(even){
+.tabla-filas-prov:nth-child(even), .tabla-filas-con:nth-child(even){
     background-color:rgb(108 117 125);
     color:#f2fbff;
 }
@@ -383,7 +391,7 @@ span:hover .delete,span:hover .edit{
     color: rgb(0, 0, 0);
 }
 
-.tabla-filas-prov:nth-child(odd){
+.tabla-filas-prov:nth-child(odd), .tabla-filas-con:nth-child(odd){
     background-color:rgb(255 255 255);
     color:black;
 }
@@ -393,17 +401,20 @@ span:hover .delete,span:hover .edit{
 }
 
 .tabla-celdas-prov{
+    display: flex;
     height:1.7rem;
     padding: 10px 0 0 5px;
 }
 
 .tabla-filas-prov:hover, 
-.tabla-filas-prov:hover a{
+.tabla-filas-prov:hover a,
+.tabla-filas-con:hover, 
+.tabla-filas-con:hover a{
     background-color: rgb(61, 61, 61);
     color: honeydew;
 }
 
-.tabla-filas-prov img:hover{
+.tabla-filas-prov img:hover, .tabla-filas-con img:hover{
     background-color:white;
     border-radius: 50%;
 }

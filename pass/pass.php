@@ -8,7 +8,7 @@ if(!empty($fila)){
     <h1>CONTRASEÑAS</h1>
 </div>
 <div class="tabla">
-<div class="tabla-encabezado-prov">
+<div class="tabla-encabezado-con">
     <div class="th">N</div>
     <div class="th">PAGINA</div>
     <div class="th">CENTRO</div>

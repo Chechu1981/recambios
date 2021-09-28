@@ -150,7 +150,7 @@ public function getModal($id){
       $i = 1;
       while($fila = $select->fetch()){
           $datos = $datos .'
-          <div class="tabla-filas-prov">
+          <div class="tabla-filas-con">
             <div scope="row" data-label="N" class="tabla-celdas-prov">'.$i++.'</div>
             <div data-label="PAGINA" class="tabla-celdas-prov">'.$fila[1].'</div>
             <div data-label="CENTRO" class="tabla-celdas-prov">'.$fila[2].'</div>
