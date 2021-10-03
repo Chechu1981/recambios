@@ -65,6 +65,7 @@
         </nav>
     <div class="contenedor">
         <div id="table"></div>
+        <div id="tablepass"></div>
     </div>
     <footer class="foot">
    Jesús Martín <?php echo date("Y"); ?>

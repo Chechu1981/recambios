@@ -60,6 +60,5 @@
     </div>
 
     <input type="hidden" id="modo" value="insert"></input>
-    <button class="btn btn-primary m-4 float-end" onclick="guardarPass()">Guardar</button>
+    <button onclick="guardarPass()">Guardar</button>
 </div>
-<script src="../js/jsfrm.js"></script>

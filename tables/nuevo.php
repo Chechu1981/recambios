@@ -102,16 +102,13 @@
         <div class="col-auto">
           <label for="inputPassword6" class="col-form-label">Fichero</label>
         </div>
-        <div class="col-auto">
-          <input type="file" id="file" class="form-control" aria-describedby="passwordHelpInline" value="'.$fila[7].'">
+        <div>
+          <input type="file" id="file" value="'.$fila[7].'" onchange="openPrBar()">
         </div>
-        <div class="col-auto">
-          <span id="passwordHelpInline" class="form-text">
+        <div id="prBar">
+          <span>
             Sube algún fichero relevante
           </span>
-        </div>
-        <div class="" id="pb">
-            
         </div>
       </div>
     <input type="hidden" id="modo" value="insert"></input>

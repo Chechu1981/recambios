@@ -1,48 +1,55 @@
-let guardar = () =>{
+let guardar = (id) =>{
     let getDate = document.getElementsByTagName('input');
     let file,nameFile,typeFile = "";
     if(getDate[7].files[0] != undefined){
-        file = fichero.files[0];
-        nameFile = fichero.files[0]["name"];
-        typeFile = fichero.files[0]['type'].split("/")[1];
+        file = getDate[7].files[0];
+        nameFile = getDate[7].files[0]["name"];
+        typeFile = getDate[7].files[0]['type'].split("/")[1];
     }
     let rnd = Math.round(Math.random()*9999999999)+'.'+typeFile;
     const formData = new FormData();
+    formData.append("id",id);
     formData.append("nombre",getDate[0].value);
     formData.append("marca",getDate[1].value);
     formData.append("mail",getDate[2].value);
     formData.append("tlfn",getDate[3].value);
     formData.append("contacto",getDate[4].value);
     formData.append("ciudad",getDate[5].value);
-    formData.append("nameFile",getDate[6].value);
-    formData.append("typeFile",getDate[7]);
+    formData.append("tipo",getDate[6].value);
+    formData.append("typeFile",typeFile);
+    formData.append("nameFile",nameFile);
     formData.append("ruta", rnd);
+    formData.append("fichero", file);
     
-    createObjectXhr('./tables/'+$('modo').value+'.php',formData);
+    fetch('./tables/'+$('modo').value+'.php',{
+        method: 'POST',
+        body : formData,
+    });
     $("myModal").style.display = "none";
-    table.innerHTML = findRegister($('search').value);
+    findRegister($('search').value);
 }
 
 let eliminar = (id) =>{
-    createObjectXhr('./tables/eliminar.php?id='+id);
+    createObjectXhr('./tables/eliminar.php?id='+id,table);
     $("myModal").style.display = "none";
-    table.innerHTML = findRegister($('search').value);
+    findRegister($('search').value);
 }
 
-let guardarPass = () =>{    
+let guardarPass = (id) =>{    
     const frmData = new FormData();
+    frmData.append("id",id);
     frmData.append("web",$('web').value);
     frmData.append("centro",$('centro').value);
     frmData.append("usuario",$('usuario').value);
-    frmData.append("pass",$('pass').value);
-    table.innerHTML = createObjectXhr('./pass/'+$('modo').value+'.php',frmData);
+    frmData.append("pass",$('passwd').value);
+    createObjectXhr('./pass/'+$('modo').value+'.php',table,frmData);
     $("myModal").style.display = "none";
-    table.innerHTML = findRegister($('search').value);
+    findRegister($('search').value);
 }
 
 let eliminarPass = (id) =>{
-    createObjectXhr('./pass/eliminar.php?id='+id);
-    table.innerHTML = findRegister($('search').value);
+    createObjectXhr('./pass/eliminar.php?id='+id,table);
+    findRegister($('search').value);
 }
 
 let guardarLink = (id) =>{    
@@ -53,14 +60,14 @@ let guardarLink = (id) =>{
     datos.append('icon',$('icon').value);
     datos.append('name',$('name').value);
     let modo = $('modo').value;
-    createObjectXhr('./links/'+modo+'.php',datos);
+    createObjectXhr('./links/'+modo+'.php',table,datos);
     $("myModal").style.display = "none";
-    openLink(false,'./links/links.php');
+    openLink(false,'./links/index.php');
 }
 
 let eliminarLink = (id) =>{
-    createObjectXhr('./links/eliminar.php?id='+id);
-    openLink(false,'./links/links.php');
+    createObjectXhr('./links/eliminar.php?id='+id,table);
+    openLink(false,'./links/index.php');
     $("myModal").style.display = "none";
 }
 
@@ -73,15 +80,25 @@ let guardarInt = (id) =>{
     frmData.append('limpieza',$('limpieza').value);
     frmData.append('ventas',$('ventas').value);
     let modo = $('modo').value;
-    createObjectXhr('./internas/'+modo+'.php',frmData);
+    createObjectXhr('./internas/'+modo+'.php',table,frmData);
     $("myModal").style.display = "none";
-    openLink(false,'./internas/internas.php');
 }
 
 let eliminarInt = (id) =>{
     let frmData = new FormData();
     frmData.append('id',id);
-    createObjectXhr('./internas/eliminar.php',frmData);
+    createObjectXhr('./internas/eliminar.php',table,frmData);
     $("myModal").style.display = "none";
-    openLink(false,'./internas/internas.php');
+    openLink(false,'./internas/index.php');
+}
+
+let openPrBar = () => {
+    $('prBar').innerHTML = '<progress id="prgBar" max="100"></progress>';
+    let fileLoad = $('file').files[0];
+    let fr = new FileReader();
+    fr.readAsDataURL(fileLoad);
+    fr.addEventListener('progress', function(e){
+        $('prgBar').value = (e.loaded * 100)/e.total;
+        console.log(e.loaded);
+    })
 }

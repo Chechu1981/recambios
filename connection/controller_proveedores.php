@@ -182,17 +182,17 @@ public function editar($id) {
           <label for="inputPassword6" class="col-form-label">Fichero</label>
         </div>
         <div class="col-auto">
-          <input type="file" id="file" class="form-control" aria-describedby="passwordHelpInline" value="./docs/'.$fila[8].'">
+          <input type="file" id="file" onchange="openPrBar" value="./docs/'.$fila[8].'">
         </div>
-        <div class="col-auto">
+        <div id="prBar">
           <span id="passwordHelpInline" class="form-text">
             Sube algún fichero relevante
           </span>
         </div>
       </div>
-      <input type="hidden" id="modo" value="update"></input>
-      <button class="btn btn-primary m-4" onclick="guardar()" >Guardar</button>
-      <button class="btn btn-secondary m-4 float-end" onclick="eliminar('.$fila[0].')" >Eliminar</button>
+      <input type="hidden" id="modo" value="update" onchenge="openPrBar"></input>
+      <button onclick="guardar('.$fila[0].')" >Guardar</button>
+      <button onclick="eliminar('.$fila[0].')" >Eliminar</button>
       </div>';
       } 
     return $datos;

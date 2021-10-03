@@ -1,8 +1,9 @@
+let $ = (target) => document.getElementById(target);
 const entrar = () =>{
-    let name = document.getElementById('usuario');
-    let coment = document.getElementById('coment');
-    let pass = document.getElementById('pass');
-
+    let name = $('usuario');
+    let coment = $('coment');
+    let pass = $('pass');
+    
     (name.value === 'jesus' && pass.value === 'ocasionplus')? location.href = './connection/login_controller.php?user=' + name.value + '&pass=' + pass.value : coment.innerHTML = "no entra " + name.value;
 }
 
@@ -13,4 +14,4 @@ document.body.addEventListener('click', (e) => {
 document.body.addEventListener('keyup',(e) => {
     (e.key == "Enter") ? entrar() : "";
 })
-document.getElementById('usuario').focus();
+$('usuario').focus();

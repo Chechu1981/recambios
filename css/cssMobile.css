@@ -1,0 +1,97 @@
+@media(max-width: 992px){
+    .contenedor #table{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 1% 0%;
+    }
+
+    .table-title{
+        margin-left: 20px;
+    }
+
+    .tabla-encabezado-prov, .tabla-encabezado, .tabla-encabezado-con{
+        display:none;
+    }
+   
+    .tabla-filas-prov, .tabla-filas-con{
+        display: block;
+        width: 100%;
+    }
+
+    .tabla-filas-prov, .tabla-filas-con{
+        padding-left: 50%;
+        position: relative;
+        margin-right: 10px;
+        margin: 1% 1%;
+    }
+    
+    .tabla-filas-prov .tabla-celdas-prov::before, .tabla-filas-con .tabla-celdas-con::before {
+        content: attr(data-label);
+        position: absolute;
+        padding-left: 15px;
+        left: 0;
+    }
+
+    .nav-body{
+        display: none;
+    }
+
+    .hamb{
+        display: block;
+        top: 18px;
+        width: 48px;
+        height: 5px;
+        background: #222;
+        position: relative;
+        cursor: pointer;
+    }
+
+    .hamb::before,.hamb::after{
+        width:44px;
+        height:5px;
+        background-color:black;
+        position: absolute;
+        content:'';
+    }
+
+    .hamb::before{
+        top:-11px;
+    }
+
+    .hamb::after{
+        top:11px;
+    }
+
+    .hamb, .hamb::before,.hamb::after,.nav-body{
+        transition: all ease-in-out 0.4s;
+    }
+
+    .hamb.animation{
+        background-color: transparent;
+    }
+
+    .hamb.animation::before{
+        top:0px;
+        transform: rotate(-45deg);
+    }
+
+    .hamb.animation::after{
+        top:0px;
+        transform: rotate(45deg);        
+    }
+
+    .nav-body.animation{
+        display:block;
+        margin-top: 50px;
+        position: fixed;
+        width:100%;
+    }
+
+    .item-link.animation{
+        text-align: center;
+        padding-bottom: 1px;
+        margin-bottom: 1px;
+        margin-left: 0px;;
+    }
+}

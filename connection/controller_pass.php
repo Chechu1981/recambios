@@ -94,7 +94,7 @@ class ConPass{
           <label for="inputPassword6" class="col-form-label">Contraseña</label>
         </div>
         <div class="col-auto">
-          <input type="tel" id="pass" class="form-control" aria-describedby="passwordHelpInline" value="'.$fila[4].'">
+          <input id="passwd" class="form-control" value="'.$fila[4].'">
         </div>
         <div class="col-auto">
           <span id="passwordHelpInline" class="form-text">
@@ -104,7 +104,7 @@ class ConPass{
       </div>
 
       <input type="hidden" id="modo" value="update"></input>
-      <button class="btn btn-primary m-4" onclick="guardarPass()" >Guardar</button>
+      <button class="btn btn-primary m-4" onclick="guardarPass('.$fila[0].')" >Guardar</button>
       <button class="btn btn-secondary m-4 float-end" onclick="eliminarPass('.$fila[0].')" >Eliminar</button>
       </div>';
       } 

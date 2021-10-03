@@ -2,27 +2,33 @@
 
 const $ = (element) => document.getElementById(element);
 const table = $('table');
+const tablePass = $('tablepass');
+const modal = $("myModal");
 const oHead = document.getElementsByTagName('HEAD').item(0); 
 const oScript= document.createElement("script");
 $('search').focus();
 
-
-// LOAD AJAX OBJECT
-let createObjectXhr = (target,data) => {
-    let xhr,str;
-    (window.XMLHttpRequest) ? xhr = new XMLHttpRequest() : xhr = new ActiveXObject("Microsoft.XMLHTTP");
-    xhr.open('POST',target,false);    
-    xhr.addEventListener('load',(e)=>{
-        str = e.target.response;
-    });
-    xhr.send(data);
-    return str;
+// LOAD FETCH OBJECT
+function createObjectXhr(target,domPrint,data){
+    tablePass.innerHTML = '';
+    let isModal = true;
+    (domPrint == modal) ? domPrint = modal.firstElementChild : isModal = false;
+    fetch(target,{
+        method: 'POST',
+        body: data,
+    })
+    .then(response => (response.ok == true) ? response.text(): 'cargando datos. Espere.....')
+    .then((str) => {
+        domPrint.innerHTML = str;
+        (target.split('/')[2] == 'update.php') ? openLink(false,'./' + target.split('/')[1] + '/index.php'):'';
+    })
+    .catch(error => console.log("el error es: " + error));
 }
 
 //LOAD HOME
 let firstPage = () => {
     $('search').disabled = false;
-    table.innerHTML = createObjectXhr('./main/cards.php',true);
+    createObjectXhr('./main/cards.php',table);
 }
 firstPage();
 
@@ -32,29 +38,27 @@ $('search').addEventListener('click',() => {
 })
 
 let findRegister = (target) =>{
-    let prov = createObjectXhr('./tables/proveedores.php?find='+target);
-    let password = createObjectXhr('./pass/pass.php?find='+target);
-    return prov + password;
+    createObjectXhr('./tables/index.php?find='+target,table);
+    createObjectXhr('./pass/index.php?find='+target,tablePass);
 }
  
 $('search').addEventListener('keyup',(e) => {
     table.style.display = 'block';    
-    table.innerHTML =  findRegister(e.target.value);
+    findRegister(e.target.value);
 });
 
-let openLink = (e,target,event) =>{
+let openLink = (disabledSearchBar,target,event) =>{
     menuOcultar();
     let openNew = (add)=>{
-        const modal = $("myModal");
         modal.style.display = "block";
-        modal.firstElementChild.innerHTML = createObjectXhr(add);
+        createObjectXhr(add,modal);
     };
     let getTable = (evt,add) =>{
         (evt == true) ? $('search').disabled = true : $('search').disabled = false;
         table.style.display ='block';
-        table.innerHTML =  createObjectXhr(add);
+        createObjectXhr(add,table);
     };
-    (event == undefined) ? getTable(e,target) : $(event).addEventListener('click',openNew(target));
+    (event == undefined) ? getTable(disabledSearchBar,target) : $(event).addEventListener('click',openNew(target));
     document.getElementsByTagName('input')[0].focus();
 }
 
@@ -64,18 +68,15 @@ let abrirmodal = (id,tb,typ) => {
     let frmData = new FormData();
     frmData.append('id',id);
     modal.style.display = "block";
-    modal.firstElementChild.innerHTML = createObjectXhr(`./${tb}/${typ}.php`,frmData);
-    console.log(id,tb,typ);
+    createObjectXhr(`./${tb}/${typ}.php`,modal,frmData);
 }
 
 //Toggle tabs links
 
 let changeTab = (id) => {
     Array.from(document.getElementsByTagName('button')).map((e) => e.className = '');
-    console.log(id);
     Array.from(document.getElementsByClassName('block')).map((e) =>{
         e.className = "block hide";
-        console.log(e.id);
         (e.id == id) ? e.className = "block show": e.className = "block hide";
     });
     $(id).className = "active";
@@ -93,10 +94,10 @@ document.body.addEventListener('click',(e)=>{
     (e.target.id == "Pedit") ? abrirmodal(e.target.alt,'pass','modificar') : "";
     (e.target.id == "Ledit") ? abrirmodal(e.target.alt,'links','modificar') : "";
     (e.target.id == "Iedit") ? abrirmodal(e.target.alt,'internas','modificar') : "";
-    (e.target.id == "links" || e.target.id == "linksMain") ? openLink(false,'./links/links.php') : "";
-    (e.target.id == "pass" || e.target.id == "passMain") ? openLink(false,'./pass/pass.php') : "";
-    (e.target.id == "agenda" || e.target.id == "agendaMain") ? openLink(false,'./tables/proveedores.php') : "";
-    (e.target.id == "internas" || e.target.id == "internasMain") ? openLink(false,'./internas/internas.php') : "";
+    (e.target.id == "links" || e.target.id == "linksMain") ? openLink(false,'./links/index.php') : "";
+    (e.target.id == "pass" || e.target.id == "passMain") ? openLink(false,'./pass/index.php') : "";
+    (e.target.id == "agenda" || e.target.id == "agendaMain") ? openLink(false,'./tables/index.php') : "";
+    (e.target.id == "internas" || e.target.id == "internasMain") ? openLink(false,'./internas/index.php') : "";
     (e.target.id == "info") ? abrirmodal(e.target.alt,'tables','modal') : "";
     (e.target.id == "Pinfo") ? abrirmodal(e.target.alt,'pass','modal') : "";
     (e.target.id == "closeModal") ? $("myModal").style.display = "none" : "";

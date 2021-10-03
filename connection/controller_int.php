@@ -26,11 +26,16 @@ class ConInt{
 
     //Modificar campos
     public function update($entrada){
-        $db = Db::conectar();
-        $sentencia = "UPDATE internas SET centro = '$entrada[1]', mecanica = '$entrada[2]', carroceria = '$entrada[3]', limpieza = '$entrada[4]', ventas = '$entrada[5]' WHERE id LIKE '".$entrada[0]."'";
-        $select = $db->prepare($sentencia);
-        $select->execute();
-        echo "modificado con éxito.";
+            $db = Db::conectar();
+            $sentencia = "UPDATE internas SET centro = '
+                $entrada[1]', mecanica = '$entrada[2]', 
+                carroceria = '$entrada[3]', 
+                limpieza = '$entrada[4]', 
+                ventas = '$entrada[5]' 
+                WHERE id LIKE '".$entrada[0]."'";
+            $select = $db->prepare($sentencia);
+            $select->execute();
+            return true;        
     }
 
     //Muestra datos de edicion
