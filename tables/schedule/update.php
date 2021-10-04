@@ -1,5 +1,5 @@
 <?php 
-include_once('../connection/controller_proveedores.php');
+include_once('../../connection/controller_proveedores.php');
 
 $datos = array($_POST['id'],
                 $_POST['nombre'],

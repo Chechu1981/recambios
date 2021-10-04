@@ -20,7 +20,7 @@ function createObjectXhr(target,domPrint,data){
     .then(response => (response.ok == true) ? response.text(): 'cargando datos. Espere.....')
     .then((str) => {
         domPrint.innerHTML = str;
-        (target.split('/')[2] == 'update.php') ? openLink(false,'./' + target.split('/')[1] + '/index.php'):'';
+        (target.split('/')[2] == 'update.php') ? openLink(false,'./tables/schedule/' + target.split('/')[2] + '/index.php'):'';
     })
     .catch(error => console.log("el error es: " + error));
 }
@@ -38,8 +38,8 @@ $('search').addEventListener('click',() => {
 })
 
 let findRegister = (target) =>{
-    createObjectXhr('./tables/index.php?find='+target,table);
-    createObjectXhr('./pass/index.php?find='+target,tablePass);
+    createObjectXhr('./tables/schedule/index.php?find='+target,table);
+    createObjectXhr('./tables/pass/index.php?find='+target,tablePass);
 }
  
 $('search').addEventListener('keyup',(e) => {
@@ -68,7 +68,7 @@ let abrirmodal = (id,tb,typ) => {
     let frmData = new FormData();
     frmData.append('id',id);
     modal.style.display = "block";
-    createObjectXhr(`./${tb}/${typ}.php`,modal,frmData);
+    createObjectXhr(`./tables/${tb}/${typ}.php`,modal,frmData);
 }
 
 //Toggle tabs links
@@ -84,21 +84,21 @@ let changeTab = (id) => {
 
 // LISTEN CLICKS
 document.body.addEventListener('click',(e)=>{
-    (e.target.id == "new") ? openLink(true,'./tables/nuevo.php','new') : "";
-    (e.target.id == "passNew") ? openLink(true,'./pass/nuevo.php','passNew') : "";
-    (e.target.id == "linkNew") ? openLink(true,'./links/nuevo.php','linkNew') : "";
-    (e.target.id == "intNew") ? openLink(true,'./internas/nuevo.php','intNew') : "";
+    (e.target.id == "new") ? openLink(true,'./tables/schedule/nuevo.php','new') : "";
+    (e.target.id == "passNew") ? openLink(true,'./tables/pass/nuevo.php','passNew') : "";
+    (e.target.id == "linkNew") ? openLink(true,'./tables/links/nuevo.php','linkNew') : "";
+    (e.target.id == "intNew") ? openLink(true,'./tables/internas/nuevo.php','intNew') : "";
     (e.target.id == "calc" || e.target.id == "calcMain") ? openLink(true,'./calc/calc.php') : "";
     (e.target.alt == "ocasionplus") ? firstPage(false) : "";
-    (e.target.id == "edit") ? abrirmodal(e.target.alt,'tables','modificar') : "";
+    (e.target.id == "edit") ? abrirmodal(e.target.alt,'schedule','modificar') : "";
     (e.target.id == "Pedit") ? abrirmodal(e.target.alt,'pass','modificar') : "";
     (e.target.id == "Ledit") ? abrirmodal(e.target.alt,'links','modificar') : "";
     (e.target.id == "Iedit") ? abrirmodal(e.target.alt,'internas','modificar') : "";
-    (e.target.id == "links" || e.target.id == "linksMain") ? openLink(false,'./links/index.php') : "";
-    (e.target.id == "pass" || e.target.id == "passMain") ? openLink(false,'./pass/index.php') : "";
-    (e.target.id == "agenda" || e.target.id == "agendaMain") ? openLink(false,'./tables/index.php') : "";
-    (e.target.id == "internas" || e.target.id == "internasMain") ? openLink(false,'./internas/index.php') : "";
-    (e.target.id == "info") ? abrirmodal(e.target.alt,'tables','modal') : "";
+    (e.target.id == "links" || e.target.id == "linksMain") ? openLink(false,'./tables/links/index.php') : "";
+    (e.target.id == "pass" || e.target.id == "passMain") ? openLink(false,'./tables/pass/index.php') : "";
+    (e.target.id == "agenda" || e.target.id == "agendaMain") ? openLink(false,'./tables/schedule/index.php') : "";
+    (e.target.id == "internas" || e.target.id == "internasMain") ? openLink(false,'./tables/internas/index.php') : "";
+    (e.target.id == "info") ? abrirmodal(e.target.alt,'schedule','modal') : "";
     (e.target.id == "Pinfo") ? abrirmodal(e.target.alt,'pass','modal') : "";
     (e.target.id == "closeModal") ? $("myModal").style.display = "none" : "";
     (e.target.id == "myModal") ? $("myModal").style.display = "none" : "";

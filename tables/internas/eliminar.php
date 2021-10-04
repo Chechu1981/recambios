@@ -1,5 +1,5 @@
 <?php 
-include_once('../connection/controller_int.php');
+include_once('../../connection/controller_int.php');
 
 $busqueda = new ConInt();
 

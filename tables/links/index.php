@@ -1,5 +1,5 @@
 <?php 
-include_once('../connection/controller_links.php');
+include_once('../../connection/controller_links.php');
 
 $busqueda = new ConLinks();
 @$fila = $busqueda->search($_GET['find']);

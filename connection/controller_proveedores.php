@@ -15,7 +15,7 @@ public function insert($entrada,$fichero){
   $select->execute();
 
   //Guarda el fichero en el servidor
-  $dir_subida = '../docs/';
+  $dir_subida = '../../docs/';
   $fichero_subido = $dir_subida . $entrada[9];
   @rename($fichero['name'],$entrada[9]);
   if (move_uploaded_file(@$fichero['tmp_name'], $fichero_subido)) {
@@ -31,6 +31,7 @@ public function insert($entrada,$fichero){
 //Eliminar entrada
 public function delete($id){
   $db = Db::conectar();
+  $nameFile = '';
   $fichero = "SELECT ruta FROM proveedores WHERE id = '".$id."'";
   foreach ($db->query($fichero) as $row) {
     $nameFile = $row[0];
@@ -38,6 +39,11 @@ public function delete($id){
   $sentencia = "DELETE FROM `proveedores` WHERE id = '".$id."'";
   $select = $db->prepare($sentencia);
   $select->execute();
+  $dir_subida = '../../docs/';
+  if($nameFile != ''){
+    $fichero_subido = $dir_subida . $nameFile;
+    unlink($fichero_subido);
+  }
   return true;
 }
 
@@ -49,7 +55,7 @@ public function update($entrada,$fichero) {
   $select->execute();
 
   //Guarda el fichero en el servidor
-  $dir_subida = '../docs/';
+  $dir_subida = '../../docs/';
   $fichero_subido = $dir_subida . $entrada[9];
   if(isset($fichero)){
     @rename($fichero['name'],$entrada[9]);

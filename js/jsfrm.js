@@ -21,7 +21,7 @@ let guardar = (id) =>{
     formData.append("ruta", rnd);
     formData.append("fichero", file);
     
-    fetch('./tables/'+$('modo').value+'.php',{
+    fetch('./tables/schedule/'+$('modo').value+'.php',{
         method: 'POST',
         body : formData,
     });
@@ -30,7 +30,7 @@ let guardar = (id) =>{
 }
 
 let eliminar = (id) =>{
-    createObjectXhr('./tables/eliminar.php?id='+id,table);
+    createObjectXhr('./tables/schedule/eliminar.php?id='+id,table);
     $("myModal").style.display = "none";
     findRegister($('search').value);
 }
@@ -48,7 +48,7 @@ let guardarPass = (id) =>{
 }
 
 let eliminarPass = (id) =>{
-    createObjectXhr('./pass/eliminar.php?id='+id,table);
+    createObjectXhr('./tables/pass/eliminar.php?id='+id,table);
     findRegister($('search').value);
 }
 
@@ -60,14 +60,14 @@ let guardarLink = (id) =>{
     datos.append('icon',$('icon').value);
     datos.append('name',$('name').value);
     let modo = $('modo').value;
-    createObjectXhr('./links/'+modo+'.php',table,datos);
+    createObjectXhr('./tables/links/'+modo+'.php',table,datos);
     $("myModal").style.display = "none";
-    openLink(false,'./links/index.php');
+    openLink(false,'./tables/links/index.php');
 }
 
 let eliminarLink = (id) =>{
-    createObjectXhr('./links/eliminar.php?id='+id,table);
-    openLink(false,'./links/index.php');
+    createObjectXhr('./tables/links/eliminar.php?id='+id,table);
+    openLink(false,'./tables/links/index.php');
     $("myModal").style.display = "none";
 }
 
@@ -80,16 +80,16 @@ let guardarInt = (id) =>{
     frmData.append('limpieza',$('limpieza').value);
     frmData.append('ventas',$('ventas').value);
     let modo = $('modo').value;
-    createObjectXhr('./internas/'+modo+'.php',table,frmData);
+    createObjectXhr('./tables/internas/'+modo+'.php',table,frmData);
     $("myModal").style.display = "none";
 }
 
 let eliminarInt = (id) =>{
     let frmData = new FormData();
     frmData.append('id',id);
-    createObjectXhr('./internas/eliminar.php',table,frmData);
+    createObjectXhr('./tables/internas/eliminar.php',table,frmData);
     $("myModal").style.display = "none";
-    openLink(false,'./internas/index.php');
+    openLink(false,'./tables/internas/index.php');
 }
 
 let openPrBar = () => {
@@ -99,6 +99,5 @@ let openPrBar = () => {
     fr.readAsDataURL(fileLoad);
     fr.addEventListener('progress', function(e){
         $('prgBar').value = (e.loaded * 100)/e.total;
-        console.log(e.loaded);
     })
 }

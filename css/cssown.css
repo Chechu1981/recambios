@@ -2,6 +2,8 @@
 
 *{
 font-family: 'Josefin Sans', sans-serif;
+font-size: .875rem;
+letter-spacing: 0.2px;
 }
 
 a{
@@ -354,9 +356,10 @@ span:hover .delete,span:hover .edit{
 /*TABLA PROVEEDORES */
 
 .tabla-encabezado-prov, .tabla-encabezado-con{
+    background-color: white;
     padding: 5px 0;
     position: sticky;
-    top:123px;
+    top:98px;
     display: grid;
     grid-gap: 1.5rem;
     padding-bottom: 5px;

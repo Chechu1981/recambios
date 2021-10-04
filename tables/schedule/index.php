@@ -1,5 +1,5 @@
 <?php 
-include_once('../connection/controller_proveedores.php');
+include_once('../../connection/controller_proveedores.php');
 
 $busqueda = new ConProv();
 @$fila = $busqueda->buscar($_GET['find']);
