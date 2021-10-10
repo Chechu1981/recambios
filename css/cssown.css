@@ -317,6 +317,12 @@ span:hover .delete,span:hover .edit{
     text-align:right;
 }
 
+.form-area{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
 
 /* TABLA CON CSS */
 
@@ -353,6 +359,34 @@ span:hover .delete,span:hover .edit{
     color: honeydew;
 }
 
+/*TABLA DOCS*/
+
+.tabla-encabezado-docs{
+    display: grid;
+    grid-gap: 1.5rem;
+    padding-bottom: 5px;
+    grid-template-columns: 5% 40% 35% 5% 5%;
+    font-size: larger;
+    border-bottom: 1px solid;
+}
+
+.tabla-filas-docs{
+    padding: 5px 0;
+    grid-gap: 1.5rem;
+    display: grid;
+    grid-template-columns: 5% 40% 35% 5% 5%;
+}
+
+.tabla-celdas-docs{
+    padding: 10px 0 0 5px;
+}
+
+.tabla-filas-docs:hover{
+    background-color: rgb(61, 61, 61);
+    color: honeydew;
+}
+
+
 /*TABLA PROVEEDORES */
 
 .tabla-encabezado-prov, .tabla-encabezado-con{
@@ -384,21 +418,27 @@ span:hover .delete,span:hover .edit{
     grid-template-columns: 2% 20% 14% 25% 10% 10% 5% 5%;
 }
 
-.tabla-filas-prov:nth-child(even), .tabla-filas-con:nth-child(even){
+.tabla-filas-prov:nth-child(even),
+.tabla-filas-docs:nth-child(even), 
+.tabla-filas-con:nth-child(even){
     background-color:rgb(108 117 125);
     color:#f2fbff;
 }
 
-.tabla-filas-prov:nth-child(even) a{
+.tabla-filas-prov:nth-child(even) a,
+.tabla-filas-docs:nth-child(odd) a{
     color: rgb(255, 255, 255);
 }
 
-.tabla-filas-prov:nth-child(odd), .tabla-filas-con:nth-child(odd){
+.tabla-filas-prov:nth-child(odd),
+.tabla-filas-docs:nth-child(odd), 
+.tabla-filas-con:nth-child(odd){
     background-color:rgb(255 255 255);
     color:black;
 }
 
-.tabla-filas-prov:nth-child(odd) a{
+.tabla-filas-prov:nth-child(odd) a,
+.tabla-filas-docs:nth-child(odd) a{
     color: rgb(0, 0, 0);
 }
 
@@ -410,13 +450,17 @@ span:hover .delete,span:hover .edit{
 
 .tabla-filas-prov:hover, 
 .tabla-filas-prov:hover a,
+.tabla-filas-docs:hover, 
+.tabla-filas-docs:hover a,
 .tabla-filas-con:hover, 
 .tabla-filas-con:hover a{
     background-color: rgb(61, 61, 61);
     color: honeydew;
 }
 
-.tabla-filas-prov img:hover, .tabla-filas-con img:hover{
+.tabla-filas-prov img:hover,
+.tabla-filas-docs img:hover,
+.tabla-filas-con img:hover{
     background-color:white;
     border-radius: 50%;
 }

@@ -154,7 +154,10 @@ public function getModal($id){
             <div scope="row" data-label="N" class="tabla-celdas-prov">'.$i++.'</div>
             <div data-label="PAGINA" class="tabla-celdas-prov">'.$fila[1].'</div>
             <div data-label="CENTRO" class="tabla-celdas-prov">'.$fila[2].'</div>
-            <div data-label="USUARIO" class="tabla-celdas-prov">'.$fila[3].'<input type="text" id="1'.$fila[0].'" value="'.$fila[3].'" class="hidden"><img src="./img/content_copy_black_24dp.svg" class="finger" onclick="copiar(1'.$fila[0].')" ></div>
+            <div data-label="USUARIO" class="tabla-celdas-prov">'.$fila[3].'
+              <input type="text" id="1'.$fila[0].'" value="'.$fila[3].'" class="hidden">
+                <img src="./img/content_copy_black_24dp.svg" class="finger" onclick="copiar(1'.$fila[0].')" >
+            </div>
             <div data-label="CONTRASEÑA" class="tabla-celdas-prov">'.$fila[4].'<input type="text" id="2'.$fila[0].'" value="'.$fila[4].'" class="hidden">
               <img src="./img/content_copy_black_24dp.svg" class="finger" onclick="copiar(2'.$fila[0].')" ></div>
             <div data-label="EDITAR" id="'.$fila[0].'" alt="Pedit" class="tabla-celdas-prov">

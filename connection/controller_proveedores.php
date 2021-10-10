@@ -24,7 +24,6 @@ public function insert($entrada,$fichero){
       echo "Ningún fichero subido.<p>";
   }
 
-  //echo "INSERT INTO proveedores (`proveedor`, `marca`, `mail`, `telefono`, `contacto`, `ciudad`, `tipo`) VALUES ('$entrada[1]', '$entrada[2]','$entrada[3]','$entrada[4]','$entrada[5]','$entrada[6]','$entrada[7]')";
   echo "Añadido con éxito.";
 }
 

@@ -46,13 +46,17 @@
                     Internas
                     <div class="btn-new" id="intNew">N</div>
                 </div>
-                <div class="item-link" id="calc">
+                <div class="item-link" id="center">
+                    Direcciones
+                    <div class="btn-new" id="centNew">N</div>
+                </div>
+                <!--<div class="item-link" id="calc">
                     Calculadora
                     <div class="btn-new" id="intNew"></div>
-                </div>   
-                <div class="item-link" id="docs">
+                </div>   -->
+                <div class="item-link" id="documents">
                     Documentos
-                    <div class="btn-new" id="intNew"></div>
+                    <div class="btn-new" id="documentsNew">N</div>
                 </div>                
             </div>
             <div class="hamb" id="hamb"></div>

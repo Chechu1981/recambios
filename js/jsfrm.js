@@ -1,10 +1,13 @@
+
+"use strict";
+
 let guardar = (id) =>{
     let getDate = document.getElementsByTagName('input');
     let file,nameFile,typeFile = "";
     if(getDate[7].files[0] != undefined){
         file = getDate[7].files[0];
         nameFile = getDate[7].files[0]["name"];
-        typeFile = getDate[7].files[0]['type'].split("/")[1];
+        typeFile = getDate[7].files[0]['name'].split(".")[1];
     }
     let rnd = Math.round(Math.random()*9999999999)+'.'+typeFile;
     const formData = new FormData();
@@ -71,6 +74,57 @@ let eliminarLink = (id) =>{
     $("myModal").style.display = "none";
 }
 
+let guardarDocs = (id) =>{
+    let getDate = document.getElementsByTagName('input');
+    let file,nameFile,typeFile = "";
+    if(getDate[0].files[0] != undefined){
+        file = getDate[0].files[0];
+        nameFile = getDate[0].files[0]["name"];
+        typeFile = getDate[0].files[0]['name'].split(".")[1];
+    }
+    let rnd = Math.round(Math.random()*9999999999)+'.'+typeFile;
+    const formData = new FormData();
+    formData.append("id",id);
+    formData.append("description",$('description').value);
+    formData.append("typeFile",typeFile);
+    formData.append("nameFile",nameFile);
+    formData.append("ruta", rnd);
+    formData.append("fichero", file);
+    
+    fetch('./tables/documents/'+$('modo').name+'.php',{
+        method: 'POST',
+        body : formData,
+    })
+    .then(function(){
+        $("myModal").style.display = "none";
+        openLink(false,'./tables/documents/index.php');
+    });    
+}
+
+let eliminarDocs = (id) =>{
+    createObjectXhr('./tables/documents/eliminar.php?id='+id,table);
+    $("myModal").style.display = "none";
+    openLink(false,'./tables/documents/index.php');
+}
+
+let guardarAdress = (id) =>{
+    let frmData = new FormData();
+    frmData.append('id',id);
+    frmData.append('center',$('center').value);
+    frmData.append('address',$('address').value);
+    frmData.append('mail',$('mail').value);
+    let modo = $('modo').name;
+    createObjectXhr('./tables/address/'+modo+'.php',table,frmData);
+    $("myModal").style.display = "none";
+}
+
+let eliminarAddress = (id) =>{
+    let frmData = new FormData();
+    frmData.append('id',id);
+    createObjectXhr('./tables/address/eliminar.php',table,frmData);
+    $("myModal").style.display = "none";
+}
+
 let guardarInt = (id) =>{
     let frmData = new FormData();
     frmData.append('id',id);
@@ -80,7 +134,7 @@ let guardarInt = (id) =>{
     frmData.append('limpieza',$('limpieza').value);
     frmData.append('ventas',$('ventas').value);
     let modo = $('modo').value;
-    createObjectXhr('./tables/internas/'+modo+'.php',table,frmData);
+    createObjectXhr('./tables/internas/'+modo+'.php',table,frmData)
     $("myModal").style.display = "none";
 }
 

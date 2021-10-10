@@ -20,8 +20,22 @@ function createObjectXhr(target,domPrint,data){
     .then(response => (response.ok == true) ? response.text(): 'cargando datos. Espere.....')
     .then((str) => {
         domPrint.innerHTML = str;
-        (target.split('/')[2] == 'update.php') ? openLink(false,'./tables/schedule/' + target.split('/')[2] + '/index.php'):'';
+        (target.split('/')[3] == 'update.php' || target.split('/')[3] == 'insert.php' || target.split('/')[3] == 'eliminar.php') ? 
+        openLink(false,'./'+target.split('/')[1]+'/' + target.split('/')[2] + '/index.php'):
+        '';
     })
+    .catch(error => console.log("el error es: " + error));
+}
+
+function getSelect(target,domPrint,data){
+    tablePass.innerHTML = '';
+    let isModal = true;
+    (domPrint == modal) ? domPrint = modal.firstElementChild : isModal = false;
+    fetch(target,{
+        method: 'POST',
+        body: data,
+    })
+    .then(response => (response.ok == true) ? response.text(): 'cargando datos. Espere.....')
     .catch(error => console.log("el error es: " + error));
 }
 
@@ -103,6 +117,12 @@ document.body.addEventListener('click',(e)=>{
     (e.target.id == "closeModal") ? $("myModal").style.display = "none" : "";
     (e.target.id == "myModal") ? $("myModal").style.display = "none" : "";
     (e.target.name == "linkButton") ? changeTab(e.target.innerText) : "";
+    (e.target.id == "documents") ? openLink(false,'./tables/documents/index.php') : "";
+    (e.target.id == "documentsNew") ? openLink(false,'./tables/documents/nuevo.php','documentsNew') : "";
+    (e.target.id == "Dinfo") ? abrirmodal(e.target.alt,'documents','modal') : "";
+    (e.target.id == "Dedit") ? abrirmodal(e.target.alt,'address','modificar') : "";
+    (e.target.id == "center") ? openLink(false,'./tables/address/index.php') : "";
+    (e.target.id == "centNew") ? openLink(true,'./tables/address/nuevo.php','centNew') : "";
 });
 
 // HAMB ICON CLICK ACCION
