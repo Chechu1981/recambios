@@ -8,9 +8,16 @@ class ConInt{
     }
 
     //Nueva entrada
-    public function insert($entrada){
+    public function insert($entrada64){
+        function base64($n){
+            return base64_encode($n);
+        }
+        $entrada = array_map('base64',$entrada64);
         $db = Db::conectar();
-        $sentencia = "INSERT INTO internas (`centro`, `mecanica`, `carroceria`, `limpieza`,`ventas`) VALUES ('$entrada[1]', '$entrada[2]','$entrada[3]','$entrada[4]','$entrada[5]')";
+        $sentencia = "INSERT INTO internas 
+        (`centro`, `mecanica`, `carroceria`, `limpieza`,`ventas`) 
+        VALUES 
+        ('$entrada[1]', '$entrada[2]','$entrada[3]','$entrada[4]','$entrada[5]')";
         $select = $db->prepare($sentencia);
         $select->execute();
         echo "Añadido con éxito.";
@@ -25,12 +32,21 @@ class ConInt{
     }
 
     //Modificar campos
-    public function update($entrada){
+    public function update($entrada64){
+        function base64($n){
+            return base64_encode($n);
+        }
+        $entrada = array_map('base64',$entrada64);
         $db = Db::conectar();
-        $sentencia = "UPDATE internas SET centro = '$entrada[1]', mecanica = '$entrada[2]', carroceria = '$entrada[3]', limpieza = '$entrada[4]', ventas = '$entrada[5]' WHERE id LIKE '".$entrada[0]."'";
+        $sentencia = "UPDATE internas SET 
+        centro = '$entrada[1]', 
+        mecanica = '$entrada[2]', 
+        carroceria = '$entrada[3]', 
+        limpieza = '$entrada[4]', 
+        ventas = '$entrada[5]' 
+        WHERE id LIKE '".$entrada64[0]."'";
         $select = $db->prepare($sentencia);
         $select->execute();
-        echo "modificado con éxito.";
     }
 
     //Muestra datos de edicion
@@ -44,15 +60,13 @@ class ConInt{
         while($fila = $select->fetch()){
         $datos = $datos .'
         <div class="container">
-        <legend>Editar '.utf8_encode($fila[3]).'</legend>
-        
-        
+        <legend>Editar '.utf8_encode(base64_decode($fila[3])).'</legend>
         <div class="row g-3 align-items-center m-1">
         <div class="col-auto">
             <label for="inputPassword6" class="col-form-label">Centro</label>
         </div>
         <div class="col-auto">
-            <input type="text" id="centro" class="form-control" aria-describedby="passwordHelpInline" value="'.$fila[1].'">
+            <input type="text" id="centro" class="form-control" aria-describedby="passwordHelpInline" value="'.base64_decode($fila[1]).'">
         </div>
         <div class="col-auto">
             <span id="passwordHelpInline" class="form-text">
@@ -66,7 +80,7 @@ class ConInt{
             <label for="inputPassword6" class="col-form-label">Mecánica</label>
         </div>
         <div class="col-auto">
-        <input type="text" id="mecanica" class="form-control" aria-describedby="passwordHelpInline" value="'.$fila[2].'">
+        <input type="text" id="mecanica" class="form-control" aria-describedby="passwordHelpInline" value="'.base64_decode($fila[2]).'">
         </div>
         <div class="col-auto">
             <span id="passwordHelpInline" class="form-text">
@@ -80,7 +94,7 @@ class ConInt{
             <label for="inputPassword6" class="col-form-label">Carrocería</label>
         </div>
         <div class="col-auto">
-            <input type="text" id="carroceria" class="form-control" aria-describedby="passwordHelpInline" value="'.$fila[3].'">
+            <input type="text" id="carroceria" class="form-control" aria-describedby="passwordHelpInline" value="'.base64_decode($fila[3]).'">
         </div>
         <div class="col-auto">
             <span id="passwordHelpInline" class="form-text">
@@ -94,7 +108,7 @@ class ConInt{
             <label for="inputPassword6" class="col-form-label">Limpieza</label>
         </div>
         <div class="col-auto">
-            <input type="text" id="limpieza" class="form-control" aria-describedby="passwordHelpInline" value="'.$fila[4].'">
+            <input type="text" id="limpieza" class="form-control" aria-describedby="passwordHelpInline" value="'.base64_decode($fila[4]).'">
         </div>
         <div class="col-auto">
             <span id="passwordHelpInline" class="form-text">
@@ -108,7 +122,7 @@ class ConInt{
             <label for="inputPassword6" class="col-form-label">Ventas</label>
         </div>
         <div class="col-auto">
-            <input type="text" id="ventas" class="form-control" aria-describedby="passwordHelpInline" value="'.$fila[5].'">
+            <input type="text" id="ventas" class="form-control" aria-describedby="passwordHelpInline" value="'.base64_decode($fila[5]).'">
         </div>
         <div class="col-auto">
             <span id="passwordHelpInline" class="form-text">
@@ -130,7 +144,6 @@ class ConInt{
 public function search(){
       $datos = "";
       $db = Db::conectar();
-      
       $grupos = "SELECT * FROM internas
       ORDER BY centro";
       $selectGroup = $db->prepare($grupos);
@@ -138,11 +151,11 @@ public function search(){
       while($fila = $selectGroup->fetch()){
         $datos = $datos .'
         <tr>
-            <td scope="row">'.$fila[1].'</td>
-            <td>'.$fila[2].'</td>
-            <td>'.$fila[3].'</td>
-            <td>'.$fila[4].'</td>
-            <td>'.$fila[5].'</td>
+            <td scope="row">'.base64_decode($fila[1]).'</td>
+            <td>'.base64_decode($fila[2]).'</td>
+            <td>'.base64_decode($fila[3]).'</td>
+            <td>'.base64_decode($fila[4]).'</td>
+            <td>'.base64_decode($fila[5]).'</td>
             <td><a href="javascript:openWindow(\'./internas/modificar.php?id='.$fila[0].'\')" >
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>

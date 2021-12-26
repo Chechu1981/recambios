@@ -9,21 +9,33 @@ class ConProv {
 
     //Nueva entrada
 public function insert($entrada,$fichero){
+  $contenido = $fichero == '' ? false : true;
+  if(!$contenido){
+    $entrada[8] = '';
+    $entrada[9] = '';
+  }
+  for($c = 0;$c < count($entrada);$c++){
+    $entrada[$c] = str_replace("'","\'",$entrada[$c]);
+  }
   $db = Db::conectar();
-  $sentencia = "INSERT INTO proveedores (`proveedor`, `marca`, `mail`, `telefono`, `contacto`, `ciudad`, `tipo`, `fichero`, `ruta`) VALUES ('$entrada[1]', '$entrada[2]','$entrada[3]','$entrada[4]','$entrada[5]','$entrada[6]','$entrada[7]','$entrada[8]','$entrada[9]')";
+  $sentencia = "INSERT INTO proveedores 
+    (`proveedor`, `marca`, `mail`, `telefono`, `contacto`, `ciudad`, `tipo`, `fichero`, `ruta`) 
+    VALUES 
+    ('$entrada[1]', '$entrada[2]','$entrada[3]','$entrada[4]','$entrada[5]','$entrada[6]','$entrada[7]','$entrada[8]','$entrada[9]')";
   $select = $db->prepare($sentencia);
   $select->execute();
 
   //Guarda el fichero en el servidor
-  $dir_subida = '../../docs/';
-  $fichero_subido = $dir_subida . $entrada[9];
-  @rename($fichero['name'],$entrada[9]);
-  if (move_uploaded_file(@$fichero['tmp_name'], $fichero_subido)) {
-      echo "El fichero es válido y se subió con éxito.<p>";
-  } else {
-      echo "Ningún fichero subido.<p>";
+  if($contenido){
+    $dir_subida = '../../docs/';
+    $fichero_subido = $dir_subida . $entrada[9];
+    @rename($fichero['name'],$entrada[9]);
+    if (move_uploaded_file(@$fichero['tmp_name'], $fichero_subido)) {
+        echo "El fichero es válido y se subió con éxito.<p>";
+    } else {
+        echo "Ningún fichero subido.<p>";
+    }
   }
-
   echo "Añadido con éxito.";
 }
 
@@ -48,26 +60,45 @@ public function delete($id){
 
     //modifica los campos
 public function update($entrada,$fichero) {
+  $contenido = $fichero == '' ? false : true;
+  if(!$contenido){
+    $entrada[8] = '';
+    $entrada[9] = '';
+  }
+  for($c = 0;$c < count($entrada);$c++){
+    $entrada[$c] = str_replace("'","\'",$entrada[$c]);
+  }
   $db = Db::conectar();
-  $sentencia = "UPDATE proveedores SET proveedor = '$entrada[1]', marca = '$entrada[2]', mail = '$entrada[3]', telefono = '$entrada[4]', contacto = '$entrada[5]', ciudad = '$entrada[6]', tipo = '$entrada[7]', fichero = '$entrada[8]', ruta = '$entrada[9]' WHERE id LIKE '".$entrada[0]."'";
+  $sentencia = "UPDATE proveedores SET 
+    proveedor = '$entrada[1]', 
+    marca = '$entrada[2]', 
+    mail = '$entrada[3]', 
+    telefono = '$entrada[4]', 
+    contacto = '$entrada[5]', 
+    ciudad = '$entrada[6]', 
+    tipo = '$entrada[7]', 
+    fichero = '$entrada[8]', 
+    ruta = '$entrada[9]' 
+    WHERE id LIKE '".$entrada[0]."'";
   $select = $db->prepare($sentencia);
   $select->execute();
 
   //Guarda el fichero en el servidor
-  $dir_subida = '../../docs/';
-  $fichero_subido = $dir_subida . $entrada[9];
-  if(isset($fichero)){
-    @rename($fichero['name'],$entrada[9]);
-    if (@move_uploaded_file($fichero['tmp_name'], $fichero_subido)) {
-        echo "El fichero es válido y se subió con éxito.<p>";
-    } else {
-        echo "Ningún fichero subido.<p>";
+  if($contenido){
+    $dir_subida = '../../docs/';
+    $fichero_subido = $dir_subida . $entrada[9];
+    if(isset($fichero)){
+      @rename($fichero['name'],$entrada[9]);
+      if (@move_uploaded_file($fichero['tmp_name'], $fichero_subido)) {
+          echo "El fichero es válido y se subió con éxito.<p>";
+      } else {
+          echo "Ningún fichero subido.<p>";
+      }
+    }else{
+      echo $fichero_subido;
+      unlink($fichero_subido);
     }
-  }else{
-    echo $fichero_subido;
-    unlink($fichero_subido);
   }
-  
   echo "modificado con éxito.";
 }
 
@@ -84,7 +115,7 @@ public function editar($id) {
         $datos = $datos .'
         <div class="container">
         <legend>Editar '.$fila[1].'</legend>
-        <div class="row g-3 align-items-center m-1">
+        <div class="row-form">
           <div class="col-auto">
             <label for="inputPassword6" class="col-form-label">Nombre</label>
           </div>
@@ -98,7 +129,7 @@ public function editar($id) {
           </div>
         </div>
 
-      <div class="row g-3 align-items-center m-1">
+      <div class="row-form">
         <div class="col-auto">
           <label for="inputPassword6" class="col-form-label">Marca</label>
         </div>
@@ -112,7 +143,7 @@ public function editar($id) {
         </div>
       </div>
 
-      <div class="row g-3 align-items-center m-1">
+      <div class="row-form">
         <div class="col-auto">
           <label for="inputPassword6" class="col-form-label">Correo</label>
         </div>
@@ -126,7 +157,7 @@ public function editar($id) {
         </div>
       </div>
 
-      <div class="row g-3 align-items-center m-1">
+      <div class="row-form">
         <div class="col-auto">
           <label for="inputPassword6" class="col-form-label">Teléfono</label>
         </div>
@@ -140,7 +171,7 @@ public function editar($id) {
         </div>
       </div>
 
-      <div class="row g-3 align-items-center m-1">
+      <div class="row-form">
         <div class="col-auto">
           <label for="inputPassword6" class="col-form-label">Contacto</label>
         </div>
@@ -154,7 +185,7 @@ public function editar($id) {
         </div>
       </div>
 
-      <div class="row g-3 align-items-center m-1">
+      <div class="row-form">
         <div class="col-auto">
           <label for="inputPassword6" class="col-form-label">Ciudad</label>
         </div>
@@ -168,7 +199,7 @@ public function editar($id) {
         </div>
       </div>
 
-      <div class="row g-3 align-items-center m-1">
+      <div class="row-form">
         <div class="col-auto">
           <label for="inputPassword6" class="col-form-label">Tipo</label>
         </div>
@@ -181,23 +212,23 @@ public function editar($id) {
           </span>
         </div>
       </div>
-
-      <div class="row g-3 align-items-center m-1">
+      <div class="row-form">
         <div class="col-auto">
           <label for="inputPassword6" class="col-form-label">Fichero</label>
         </div>
         <div class="col-auto">
-          <input type="file" id="file" onchange="openPrBar" value="./docs/'.$fila[8].'">
+          <button id="btnUpload" class="btn-frm">Subir Documento</button>
+          <input type="file" id="file" onchange="openPrBar()" value="./docs/'.$fila[8].'" style="display: none">
         </div>
         <div id="prBar">
-          <span id="passwordHelpInline" class="form-text">
-            Sube algún fichero relevante
-          </span>
-        </div>
+      <span id="passwordHelpInline" class="form-text">
+        Sube algún fichero relevante
+      </span>
+    </div>
       </div>
       <input type="hidden" id="modo" value="update" onchenge="openPrBar"></input>
-      <button onclick="guardar('.$fila[0].')" >Guardar</button>
-      <button onclick="eliminar('.$fila[0].')" >Eliminar</button>
+      <button onclick="guardar('.$fila[0].')" class="btn-frm">Guardar</button>
+      <button onclick="eliminar('.$fila[0].')"class="btn-frm" >Eliminar</button>
       </div>';
       } 
     return $datos;
@@ -226,8 +257,11 @@ public function getModal($id){
           Tipo: '.$fila[7].'<p/>
           <a href="./docs/'.$fila[9].'" target="_blank">'.$fila[8].'</a>
         </div>
+        <div data-label="EDIT" alt="'.$fila[0].'" id="edit" class="tabla-celdas-prov">
+          <img src="./img/outline_edit_black_48dp.png" class="btn-edit" alt="'.str_replace(' ','',$fila[0]).'" id="edit">
+        </div>
         <div class="modal-footer">
-          <button type="button" id="closeModal">CERRAR</button>
+          <button type="button" id="closeModal" class="btn-frm">CERRAR</button>
         </div>';
     }
 }
@@ -251,16 +285,13 @@ public function buscar($nombre) {
     $i = 1;
     while($fila = $seleProv->fetch()){
         $daProv = $daProv .'
-          <div class="tabla-filas-prov">
-            <div scope="row" data-label="N" class="tabla-celdas-prov">'.$i++.'</div>
+          <div class="tabla-filas-prov" loading="lazy">
+            <div scope="row" data-label="N" class="tabla-celdas-prov first-line">'.$i++.'</div>
             <div data-label="PROVEEDOR" class="tabla-celdas-prov">'.strtoupper($fila[1]).'</div>
             <div data-label="MARCA" class="tabla-celdas-prov">'.strtoupper($fila[2]).'</div>
             <div data-label="CORREO" class="tabla-celdas-prov"><a href="mailto:'.$fila[3].'">'.$fila[3].'</a></div>
             <div data-label="TELÉFONO" class="tabla-celdas-prov"><a href="tel:+34 '.$fila[4].'">'.$fila[4].'</a></div>
             <div data-label="CONTACTO" class="tabla-celdas-prov">'.strtoupper($fila[5]).'</div>
-            <div data-label="EDIT" alt="'.$fila[0].'" id="edit" class="tabla-celdas-prov">
-              <img src="./img/outline_edit_black_48dp.png" class="finger" alt="'.str_replace(' ','',$fila[0]).'" id="edit">
-            </div>
             <div data-label="INFO" class="tabla-celdas-prov">
               <img src="./img/info_black_24dp.svg" class="finger" alt="'.str_replace(' ','',$fila[0]).'" id="info">
             </div>

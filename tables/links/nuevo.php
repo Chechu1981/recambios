@@ -3,7 +3,7 @@
     <legend>Nueva entrada</legend>
 
 
-    <div class="row g-3 align-items-center m-1">
+    <div class="row-form">
         <div class="col-auto">
             <label for="inputPassword6" class="col-form-label">Enlace</label>
         </div>
@@ -17,7 +17,7 @@
         </div>
     </div>
 
-    <div class="row g-3 align-items-center m-1">
+    <div class="row-form">
         <div class="col-auto">
             <label for="inputPassword6" class="col-form-label">Tipo</label>
         </div>
@@ -39,7 +39,7 @@
         </div>
     </div>
 
-    <div class="row g-3 align-items-center m-1">
+    <div class="row-form">
         <div class="col-auto">
             <label for="inputPassword6" class="col-form-label">Nombre</label>
         </div>
@@ -53,7 +53,7 @@
         </div>
     </div>
 
-    <div class="row g-3 align-items-center m-1">
+    <div class="row-form">
         <div class="col-auto">
             <label for="inputPassword6" class="col-form-label">Icono</label>
         </div>
@@ -66,7 +66,10 @@
             </span>
         </div>
     </div>
-
-    <input type="hidden" id="modo" value="insert"></input>
-    <button class="btn btn-primary m-4 float-end" onclick="guardarLink()">Guardar</button>
+    <div class="row-form">
+        <div class="col-auto">
+            <input type="hidden" id="modo" value="insert"></input>
+            <button onclick="guardarLink()" class="btn-frm" >Guardar</button>
+        </div>
+    </div>
 </div>

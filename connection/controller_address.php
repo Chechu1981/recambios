@@ -9,6 +9,9 @@ class ConAddress {
 
     //Nueva entrada
   public function insert($entrada){
+    for($c = 0;$c < count($entrada);$c++){
+      $entrada[$c] = str_replace("'","\'",$entrada[$c]);
+    }
     $db = Db::conectar();
     $sentencia = "INSERT INTO address (`center`, `address`,`mail`) VALUES ('$entrada[1]', '$entrada[2]', '$entrada[3]')";
     $select = $db->prepare($sentencia);
@@ -30,6 +33,9 @@ class ConAddress {
 
       //modifica los campos
   public function update($entrada,$fichero) {
+    for($c = 0;$c < count($entrada);$c++){
+      $entrada[$c] = str_replace("'","\'",$entrada[$c]);
+    }
     $db = Db::conectar();
     $sentencia = "UPDATE address SET center = '$entrada[1]', address = '$entrada[2]', mail = '$entrada[3]', WHERE id LIKE '".$entrada[0]."'";
     $select = $db->prepare($sentencia);

@@ -7,8 +7,11 @@ class ConDocs {
         
     }
 
-    //Nueva entrada
+//Nueva entrada
 public function insert($entrada,$fichero){
+  for($c = 0;$c < count($entrada);$c++){
+    $entrada[$c] = str_replace("'","\'",$entrada[$c]);
+  }
   $db = Db::conectar();
   $sentencia = "INSERT INTO documents (`description`, `file`,`route`,`namefile`) VALUES ('$entrada[1]', '$entrada[2]', '$entrada[4]', '$entrada[3]')";
   $select = $db->prepare($sentencia);
@@ -25,6 +28,36 @@ public function insert($entrada,$fichero){
   }
 
   echo "Añadido con éxito.";
+}
+
+//modifica los campos
+public function update($entrada,$fichero,$oldNameFile) {
+  for($c = 0;$c < count($entrada);$c++){
+    $entrada[$c] = str_replace("'","\'",$entrada[$c]);
+  }
+  $db = Db::conectar();
+  $sentencia = "UPDATE documents SET description = '$entrada[1]', route = '$entrada[4]', file = '$entrada[2]', namefile = '$entrada[3]' WHERE id LIKE '".$entrada[0]."'";
+  $select = $db->prepare($sentencia);
+  $select->execute();
+
+  //Borra el fichero anterior
+  $dir_subida = '../../docs/';
+  if($oldNameFile != ''){
+    $fichero_subido = $dir_subida . $oldNameFile;
+    unlink($fichero_subido);
+  }
+  
+  //Guarda el fichero en el servidor
+  $fichero_subido = $dir_subida . $entrada[4];
+  if(isset($fichero)){
+    @rename($fichero['name'],$entrada[4]);
+    if (@move_uploaded_file($fichero['tmp_name'], $fichero_subido)) {
+        echo "El fichero es válido y se subió con éxito.<p>";
+    } else {
+        echo "Ningún fichero subido.<p>";
+    }
+  }  
+  echo "modificado con éxito.";
 }
 
 //Eliminar entrada
@@ -46,28 +79,6 @@ public function delete($id){
   return true;
 }
 
-    //modifica los campos
-public function update($entrada,$fichero) {
-  $db = Db::conectar();
-  $sentencia = "UPDATE documents SET description = '$entrada[1]', file = '$entrada[2]' WHERE id LIKE '".$entrada[0]."'";
-  $select = $db->prepare($sentencia);
-  $select->execute();
-
-  //Guarda el fichero en el servidor
-  $dir_subida = '../../docs/';
-  $fichero_subido = $dir_subida . $entrada[2];
-  if(isset($fichero)){
-    @rename($fichero['name'],$entrada[2]);
-    if (@move_uploaded_file($fichero['tmp_name'], $fichero_subido)) {
-        echo "El fichero es válido y se subió con éxito.<p>";
-    } else {
-        echo "Ningún fichero subido.<p>";
-    }
-  }  
-  echo "modificado con éxito.";
-}
-
-
 //muestra datos de edicion
 public function editar($id) {
     $datos = "";        
@@ -84,13 +95,23 @@ public function editar($id) {
               <label for="description">Descripción del fichero</label>
               <textarea name="description" id="description" cols="30" rows="10">'.$fila[1].'</textarea>
           </div>
-          <div>
+          <div class="row-form">
+            <div class="col-auto">
               <label for="file">Documento</label>
-              <input type="file" name="file" id="file" onchange="openPrBar()">
-              <div id="prBar">'.$fila[4].'</div>
+            </div>
+            <div>
+              <button id="btnUpload" class="btn-frm">Subir Documento</button>
+              <input type="file" name="file" id="file" onchange="openPrBar()" style="display: none">
+            </div>
+            <div id="prBar">
+              <span>
+              '.$fila[4].'
+              </span>
+            </div>
           </div>
           <input type="hidden" id="modo" name="update">
-          <button type="submit" onclick="guardarDocs('.$fila[0].')">Modificar</button>
+          <button type="submit" onclick="guardarDocs('.$fila[0].',`'.$fila[3].'`)">Modificar</button>
+          <button type="submit" onclick="eliminarDocs('.$fila[0].')">Eliminar</button>
       </div>
         ';
       } 
@@ -113,13 +134,11 @@ public function getModal($id){
           <label for="description">Descripción del fichero</label>
           <textarea name="description" id="description" cols="30" rows="10">'.$fila[1].'</textarea>
       </div>
-      <div>
-          <label for="file">Documento</label>
-          <input type="file" name="file" id="file" onchange="openPrBar()">
-          <div id="prBar"></div>
+      <div class="tabla-celdas-docs">
+        <img src="./img/outline_edit_black_48dp.png" class="btn-edit" alt="'.str_replace(' ','',$fila[0]).'" id="DocEdit">
       </div>
-      <input type="hidden" id="modo" name="delete">
-      <button type="submit" onclick="eliminarDocs('.$fila[0].')">Eliminar</button>
+      <div>
+      </div>
   </div>';
     }
 }
@@ -140,9 +159,6 @@ public function buscar() {
             <div class="tabla-celdas-docs">'.$i++.'</div>
             <div class="tabla-celdas-docs">'.$fila[1].'</div>
             <div class="tabla-celdas-docs"><a href="./docs/'.$fila[3].'" download="./docs/'.$fila[3].'">'.$fila[4].'</a></div>
-            <div class="tabla-celdas-docs">
-              <img src="./img/outline_edit_black_48dp.png" class="finger" alt="'.str_replace(' ','',$fila[0]).'" id="Dedit">
-            </div>
             <div class="tabla-celdas-docs">
               <img src="./img/info_black_24dp.svg" class="finger" alt="'.str_replace(' ','',$fila[0]).'" id="Dinfo">
             </div>

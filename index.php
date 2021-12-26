@@ -1,3 +1,29 @@
+<!--
+________$$$$
+_______$$__$
+_______$___$$
+_______$___$$
+_______$$___$$
+________$____$$
+________$$____$$$
+_________$$_____$$
+_________$$______$$
+__________$_______$$
+____$$$$$$$________$$
+__$$$_______________$$$$$$
+_$$____$$$$____________$$$
+_$___$$$__$$$____________$$
+_$$________$$$____________$
+__$$____$$$$$$____________$
+__$$$$$$$____$$___________$
+__$$_______$$$$___________$
+___$$$$$$$$$__$$_________$$
+____$________$$$$_____$$$$
+____$$____$$$$$$____$$$$$$
+_____$$$$$$____$$__$$
+_______$_____$$$_$$$
+________$$$$$$$$$$
+-->
 <!DOCTYPE html>
 <html lang="es">
 
@@ -6,8 +32,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta description="Agenda personal OcasionPlus de Jesús Martín" content="width=device-width, initial-scale">
     <link rel="icon" type="image/png" href="./img/chechu.ico" sizes="32x32">
-    <link href="./css/cssown.css" rel="stylesheet" >
+    <link href="./css/cssown1.css" rel="stylesheet" >
 </head>
 
 <body>
@@ -32,32 +59,49 @@
             <div class="nav-body" id="nav-body">
                 <div class="item-link" id="agenda">
                     Agenda
-                <div class="btn-new" id="new">N</div>
+                <div class="btn-new" id="btn-new-sh">
+                    <img src="./img/descarga.svg" alt="arrow_down" id="arrow_down_sh" class="down-menu">
+                </div>
+                <div class="new newHidden" id="new">Nuevo</div>
                 </div>                
                 <div class="item-link" id="pass">
                     Contraseñas
-                    <div class="btn-new" id="passNew">N</div>
+                    <div class="btn-new" id="btn-new-pass">
+                        <img src="./img/descarga.svg" alt="arrow_down" id="arrow_down_pass" class="down-menu">
+                    </div>
+                    <div class="new newHidden" id="passNew">Nuevo</div>
                 </div>
                 <div class="item-link" id="links">
                     Enlaces
-                    <div class="btn-new" id="linkNew">N</div>
+                    <div class="btn-new" id="btn-new-link">
+                        <img src="./img/descarga.svg" alt="arrow_down" id="arrow_down_link" class="down-menu">
+                    </div>
+                    <div class="new newHidden" id="linkNew">Nuevo</div>
                 </div>
                 <div class="item-link" id="internas">
                     Internas
-                    <div class="btn-new" id="intNew">N</div>
+                    <div class="btn-new" id="btn-new-int">
+                        <img src="./img/descarga.svg" alt="arrow_down" id="arrow_down_int" class="down-menu">
+                    </div>
+                    <div class="new newHidden" id="intNew">Nuevo</div>
                 </div>
                 <div class="item-link" id="center">
                     Direcciones
-                    <div class="btn-new" id="centNew">N</div>
-                </div>
-                <!--<div class="item-link" id="calc">
-                    Calculadora
-                    <div class="btn-new" id="intNew"></div>
-                </div>   -->
+                    <div class="btn-new" id="btn-new-add">
+                        <img src="./img/descarga.svg" alt="arrow_down" id="arrow_down_add" class="down-menu">
+                    </div>
+                    <div class="new newHidden" id="centNew">Nuevo</div>
+                </div>                
                 <div class="item-link" id="documents">
                     Documentos
-                    <div class="btn-new" id="documentsNew">N</div>
-                </div>                
+                    <div class="btn-new" id="btn-new-docs">
+                        <img src="./img/descarga.svg" alt="arrow_down" id="arrow_down_docs" class="down-menu">
+                    </div>
+                    <div class="new newHidden" id="documentsNew">Nuevo</div>
+                </div>           
+                <div class="item-link" id="calc">
+                    Buscadora
+                </div>     
             </div>
             <div class="hamb" id="hamb"></div>
             <div class="google">
@@ -74,8 +118,8 @@
     <footer class="foot">
    Jesús Martín <?php echo date("Y"); ?>
     </footer>
-    <script src="./js/jsown.js"></script>
-    <script src="./js/jsfrm.js"></script>
+    <script src="./js/jsown1.js"></script>
+    <script src="./js/jsfrm1.js"></script>
 </body>
 
 </html>

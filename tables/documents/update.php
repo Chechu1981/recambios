@@ -1,6 +1,6 @@
 <?php
 include_once('../../connection/controller_documents.php');
-
+$oldNameFile = $_POST['oldNameFile'];
 $datos = array($_POST['id'],
             $_POST['description'],
             $_POST['typeFile'],
@@ -8,4 +8,4 @@ $datos = array($_POST['id'],
             $_POST['ruta']);
 
 $data = new ConDocs();
-$data->update($datos,@$_FILES['fichero']);
+$data->update($datos,@$_FILES['fichero'],$oldNameFile);

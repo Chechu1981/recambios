@@ -1,9 +1,7 @@
-
 <div class="container">
     <legend>Nueva entrada</legend>
 
-
-    <div class="row g-3 align-items-center m-1">
+    <div class="row-form">
         <div class="col-auto">
             <label for="inputPassword6" class="col-form-label">Web</label>
         </div>
@@ -17,7 +15,7 @@
         </div>
     </div>
 
-    <div class="row g-3 align-items-center m-1">
+    <div class="row-form">
         <div class="col-auto">
             <label for="inputPassword6" class="col-form-label">Centro</label>
         </div>
@@ -31,7 +29,7 @@
         </div>
     </div>
 
-    <div class="row g-3 align-items-center m-1">
+    <div class="row-form">
         <div class="col-auto">
             <label for="inputPassword6" class="col-form-label">Usuario</label>
         </div>
@@ -45,12 +43,12 @@
         </div>
     </div>
 
-    <div class="row g-3 align-items-center m-1">
+    <div class="row-form">
         <div class="col-auto">
             <label for="inputPassword6" class="col-form-label">Contraseña</label>
         </div>
         <div class="col-auto">
-            <input type="tel" id="pass" class="form-control" aria-describedby="passwordHelpInline" value="">
+            <input type="text" id="passwd" >
         </div>
         <div class="col-auto">
             <span id="passwordHelpInline" class="form-text">
@@ -58,7 +56,10 @@
             </span>
         </div>
     </div>
-
-    <input type="hidden" id="modo" value="insert"></input>
-    <button onclick="guardarPass()">Guardar</button>
+    <div class="row-form">
+        <div class="col-auto">
+            <input type="hidden" id="modo" value="insert"></input>
+            <button onclick="guardarPass()" class="btn-frm">Guardar</button>
+        </div>
+    </div>
 </div>

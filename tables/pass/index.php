@@ -15,7 +15,6 @@ if(!empty($fila)){
     <div class="th">USUARIO</div>
     <div class="th">CONTRASEÑA</div>
     <div class="th"></div>
-    <div class="th"></div>
 </div>
     <?php echo $fila; ?>
     </div>

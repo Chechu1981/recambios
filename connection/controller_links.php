@@ -9,6 +9,9 @@ class ConLinks{
 
     //Nueva entrada
     public function insert($entrada){
+        for($c = 0;$c < count($entrada);$c++){
+            $entrada[$c] = str_replace("'","\'",$entrada[$c]);
+          }
         $db = Db::conectar();
         $sentencia = "INSERT INTO links (`enlace`, `tipo`, `nombre`, `icon`) VALUES ('$entrada[0]', '$entrada[1]','$entrada[2]','$entrada[3]')";
         $select = $db->prepare($sentencia);
@@ -27,6 +30,9 @@ class ConLinks{
 
     //Modificar campos
     public function update($entrada){
+        for($c = 0;$c < count($entrada);$c++){
+            $entrada[$c] = str_replace("'","\'",$entrada[$c]);
+          }
         $db = Db::conectar();
         $sentencia = "UPDATE links SET enlace = '$entrada[1]', tipo = '$entrada[2]', nombre = '$entrada[3]', icon = '$entrada[4]' WHERE id LIKE '".$entrada[0]."'";
         $select = $db->prepare($sentencia);

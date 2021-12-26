@@ -9,6 +9,9 @@ class ConInt{
 
     //Nueva entrada
     public function insert($entrada){
+        for($c = 0;$c < count($entrada);$c++){
+            $entrada[$c] = str_replace("'","\'",$entrada[$c]);
+          }
         $db = Db::conectar();
         $sentencia = "INSERT INTO internas (`centro`, `mecanica`, `carroceria`, `limpieza`,`ventas`) VALUES ('$entrada[1]', '$entrada[2]','$entrada[3]','$entrada[4]','$entrada[5]')";
         $select = $db->prepare($sentencia);
@@ -26,9 +29,13 @@ class ConInt{
 
     //Modificar campos
     public function update($entrada){
+        for($c = 0;$c < count($entrada);$c++){
+            $entrada[$c] = str_replace("'","\'",$entrada[$c]);
+          }
             $db = Db::conectar();
-            $sentencia = "UPDATE internas SET centro = '
-                $entrada[1]', mecanica = '$entrada[2]', 
+            $sentencia = "UPDATE internas SET 
+                centro = '$entrada[1]', 
+                mecanica = '$entrada[2]', 
                 carroceria = '$entrada[3]', 
                 limpieza = '$entrada[4]', 
                 ventas = '$entrada[5]' 
@@ -49,7 +56,7 @@ class ConInt{
         while($fila = $select->fetch()){
         $datos = $datos .'
         <div class="container">
-        <legend>Editar '.utf8_encode($fila[3]).'</legend>
+        <legend>Editar '.utf8_encode($fila[1]).'</legend>
         
         <div class="row g-3 align-items-center m-1">
         <div class="col-auto">
@@ -141,13 +148,13 @@ public function search(){
       $selectGroup->execute();
       while($fila = $selectGroup->fetch()){
         $datos = $datos .'
-        <div class="tabla-filas">
-            <div scope="row" class="tabla-celdas">'.$fila[1].'</div>
-            <div class="tabla-celdas">'.$fila[2].'</div>
-            <div class="tabla-celdas">'.$fila[3].'</div>
-            <div class="tabla-celdas">'.$fila[4].'</div>
-            <div class="tabla-celdas">'.$fila[5].'</div>
-            <div class="tabla-celdas">
+        <div class="tabla-filas-internas">
+            <div scope="row" class="tabla-celdas-internas">'.$fila[1].'</div>
+            <div class="tabla-celdas-internas">'.$fila[2].'</div>
+            <div class="tabla-celdas-internas">'.$fila[3].'</div>
+            <div class="tabla-celdas-internas">'.$fila[4].'</div>
+            <div class="tabla-celdas-internas">'.$fila[5].'</div>
+            <div class="tabla-celdas-internas">
                 <img src="./img/outline_edit_black_48dp.png" class="finger" id="Iedit" alt="'.$fila[0].'">
             </div>
         </div>';

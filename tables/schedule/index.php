@@ -17,7 +17,6 @@ if(!empty($fila[0])){
         <div class="th">TELEFONO</div>
         <div class="th">CONTACTO</div>
         <div class="th"></div>
-        <div class="th"></div>
     </div>    
         <?php echo $fila; ?>
 </div>
