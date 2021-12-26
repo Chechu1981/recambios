@@ -57,10 +57,25 @@ let findRegister = (target) =>{
     createObjectXhr('./tables/schedule/index.php?find='+target,table);
     createObjectXhr('./tables/pass/index.php?find='+target,tablePass);
 }
+
+const showDiv = (value) => {
+    const list = $('showSearh').appendChild(document.createElement('ul'));
+    fetch('./tables/schedule/json.php?find='+value)
+    .then(response => (response.ok == true) ? response.text(): $('myModal').childNodes[1].innerHTML = '<img src="./img/spinner.svg">')
+    .then(result =>{
+        const arr = JSON.parse(result);
+        arr.map(e=>{
+            list.appendChild(document.createElement('li')).append(`${e.proveedor.toUpperCase()} - ${e.marca.toUpperCase()} - ${e.contact.toUpperCase()} - ${e.ciudad.toUpperCase()}`);
+            list.classList = "listSearch";
+        });
+    });    
+}
  
 $('search').addEventListener('keyup',(e) => {
-    table.style.display = 'block';    
-    findRegister(e.target.value);
+    table.style.display = 'block';  
+    //findRegister(e.target.value);
+    ($('showSearh').firstChild == null)?'':$('showSearh').removeChild($('showSearh').firstChild);
+    (e.target.value.length > 0)?showDiv(e.target.value):'';
 });
 
 let openLink = (disabledSearchBar,target,event,txtHistory) =>{
@@ -113,6 +128,7 @@ let fileLoad = () => {
 
 // LISTEN CLICKS
 document.body.addEventListener('click',(e)=>{
+    ($('showSearh').firstChild == null)?'':$('showSearh').removeChild($('showSearh').firstChild);
     (e.target.id == "new") ? openLink(true,'./tables/schedule/nuevo.php','new') : "";
     (e.target.id == "passNew") ? openLink(true,'./tables/pass/nuevo.php','passNew') : "";
     (e.target.id == "linkNew") ? openLink(true,'./tables/links/nuevo.php','linkNew') : "";

@@ -125,10 +125,10 @@ nav{
 }
 
 .item-link{
+    width: 100px;
     margin-left:10px;
     display: inherit;
     background-color: #ffffff;
-    border-radius: 3px;
     border-radius: 3px;
     padding: 0 10px;
     color:var(--second-color);
@@ -138,20 +138,33 @@ nav{
     border-bottom: 3px solid transparent;
 }
 
-.item-link:hover{
-    /*background-color:var(--restore-color);*/
-    border-bottom: 3px solid grey;
-    color:var(--selected-color);
-    transition: 0.3s;
+.item-link:before{
+    position: absolute;
+    z-index: -20;
+    bottom: 6px;
+    content: "";
+    display: block;
+    width: 0;
+    height: 3px;
+    background-color: #808080;
+    transition: all .3s;
 }
 
+.item-link:hover:before {
+    width: 100px;
+  }
+
+  .uno:before {
+    left: 0;
+  }
+
 .btn-new ~ .new{
+    width: 82px;
     position: absolute;
     margin-top: 29px;
     background-color:var(--main-color);
-    padding: 15px;
+    padding: 14px;
     border-radius: 5px;
-    margin-left: 21px;  
     z-index: -13;
     transition: .1s;
 }
@@ -178,6 +191,37 @@ nav{
 .new:hover{
     display:block;
     background-color:var(--restore-color);
+}
+
+.listSearch{
+    width:500px;
+}
+
+.listSearch li{
+    cursor: default;
+    list-style: none;
+    padding: 10px 0;
+    opacity:0.8;
+    transition: 0.2s;
+}
+
+.listSearch li:hover{
+    background-color: #6eb7d6;
+}
+
+.resultSearch{
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 0 0 24px 24px;
+    box-shadow: 0 4px 6px rgb(32 33 36 / 28%);
+    border: 0;
+    position: absolute;
+    top:53px;
 }
 
 .google{
@@ -520,20 +564,23 @@ span:hover .delete,span:hover .edit{
 .tabla-encabezado-prov, .tabla-encabezado-con{
     background-color: white;
     padding: 5px 0;
-    position: sticky;
     position: -webkit-sticky;
+    position: sticky;
     top:98px;
     display: grid;
     display: -ms-grid;
-    grid-gap: 1.5rem;
+    grid-gap: 1rem;
     padding-bottom: 5px;
+    -ms-grid-columns: 2% 20% 14% 25% 10% 5% 5%;
     grid-template-columns: 2% 20% 14% 25% 10% 10% 5% 5%;
+    text-align: center;
     font-size: larger;
     border-bottom: 1px solid;
 }
 
 .tabla-encabezado-con{
     grid-template-columns: 2% 10% 16% 30% 20% 5% 5%;
+    -ms-grid-columns: 2% 10% 16% 30% 20% 5% 5%;
 }
 
 .tabla-filas-con{

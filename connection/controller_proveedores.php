@@ -102,6 +102,35 @@ public function update($entrada,$fichero) {
   echo "modificado con éxito.";
 }
 
+//Get Json Files
+public function getJsonFiles($name){
+  $daProv = "";
+  $db = Db::conectar();
+  $senProv = "SELECT * FROM proveedores WHERE 
+  proveedores.proveedor LIKE \"%".$name."%\" 
+  OR proveedores.marca LIKE \"%".$name."%\" 
+  OR proveedores.contacto LIKE \"%".$name."%\" 
+  OR proveedores.ciudad LIKE \"%".$name."%\" 
+  OR proveedores.tipo LIKE \"%".$name."%\" 
+  OR proveedores.mail LIKE \"%".$name."%\" 
+  ORDER BY proveedor asc";
+
+  $seleProv = $db->prepare($senProv);
+  $seleProv->execute();
+  $array = array();
+  while($fila = $seleProv->fetch()){
+    $array [] = array(
+      'id' => $fila[0],
+      'proveedor' => $fila[1],
+      'marca' => $fila[2],
+      'contact' => $fila[5],
+      'ciudad' => $fila[6]
+    );
+  }
+
+  echo json_encode($array);
+}
+
 
 //muestra datos de edicion
 public function editar($id) {
